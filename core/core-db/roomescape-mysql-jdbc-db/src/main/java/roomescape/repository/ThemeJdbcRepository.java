@@ -7,11 +7,11 @@ import java.util.Optional;
 
 public interface ThemeJdbcRepository {
 
-    ThemeEntity save(ThemeEntity themeEntity);
+    ThemeEntity save(ThemeEntity entity);
 
-    Optional<ThemeEntity> findById(Long themeId);
+    Optional<ThemeEntity> findById(Long id);
 
     List<ThemeEntity> findAll();
 
-    void delete(Long themeId);
+    void delete(Long id);
 }

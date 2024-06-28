@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 import roomescape.repository.ReservationTimeJdbcRepository;
 import roomescape.repository.entity.ReservationTimeEntity;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -29,24 +27,24 @@ public class MySQLJdbcReservationTimeRepository implements ReservationTimeJdbcRe
     }
 
     @Override
-    public ReservationTimeEntity save(ReservationTimeEntity reservationTimeEntity) {
+    public ReservationTimeEntity save(ReservationTimeEntity entity) {
         String sql = "INSERT INTO reservation_time (id, theme_id, date, start_at) VALUES (:id, :theme_id, :date, :start_at) " +
                 "ON DUPLICATE KEY UPDATE theme_id = VALUES(theme_id), date = VALUES(date), start_at = VALUES(start_at)";
 
         GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
         MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource()
-                .addValue(TABLE_COLUMN_ID, reservationTimeEntity.getId())
-                .addValue(TABLE_COLUMN_THEME_ID, reservationTimeEntity.getThemeId())
-                .addValue(TABLE_COLUMN_DATE, reservationTimeEntity.getDate())
-                .addValue(TABLE_COLUMN_START_AT, reservationTimeEntity.getStartAt());
+                .addValue(TABLE_COLUMN_ID, entity.getId())
+                .addValue(TABLE_COLUMN_THEME_ID, entity.getThemeId())
+                .addValue(TABLE_COLUMN_DATE, entity.getDate())
+                .addValue(TABLE_COLUMN_START_AT, entity.getStartAt());
 
         namedParameterJdbcTemplate.update(sql, sqlParameterSource, generatedKeyHolder);
 
         if (Objects.isNull(generatedKeyHolder.getKey())) {
-            return reservationTimeEntity;
+            return entity;
         }
 
-        return reservationTimeEntity.withId(generatedKeyHolder.getKey().longValue());
+        return entity.withId(generatedKeyHolder.getKey().longValue());
     }
 
     @Override
@@ -75,12 +73,14 @@ public class MySQLJdbcReservationTimeRepository implements ReservationTimeJdbcRe
     }
 
     @Override
-    public Optional<ReservationTimeEntity> findByDateAndStartAt(LocalDate date, LocalTime startAt) {
-        String sql = "SELECT id, theme_id, date, start_at FROM reservation_time WHERE date = :date and start_at = :start_at";
+    public Optional<ReservationTimeEntity> findEquals(ReservationTimeEntity entity) {
+        String sql = "SELECT id, theme_id, date, start_at FROM reservation_time " +
+                "WHERE date = :date and start_at = :start_at and theme_id = :theme_id";
 
         MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource()
-                .addValue(TABLE_COLUMN_DATE, date)
-                .addValue(TABLE_COLUMN_START_AT, startAt);
+                .addValue(TABLE_COLUMN_DATE, entity.getDate())
+                .addValue(TABLE_COLUMN_START_AT, entity.getStartAt())
+                .addValue(TABLE_COLUMN_THEME_ID, entity.getThemeId());
 
         try {
             return Optional.ofNullable(

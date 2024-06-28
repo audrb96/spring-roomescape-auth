@@ -28,32 +28,32 @@ public class MySQLJdbcThemeRepository implements ThemeJdbcRepository {
     }
 
     @Override
-    public ThemeEntity save(ThemeEntity themeEntity) {
+    public ThemeEntity save(ThemeEntity entity) {
         String sql = "INSERT INTO theme (id, name, description, thumbnail) VALUES (:id, :name, :description, :thumbnail) " +
                 "ON DUPLICATE KEY UPDATE name = VALUES(name), description = VALUES(description), thumbnail = VALUES(thumbnail)";
 
         GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
         MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource()
-                .addValue(TABLE_COLUMN_ID, themeEntity.getId())
-                .addValue(TABLE_COLUMN_NAME, themeEntity.getName())
-                .addValue(TABLE_COLUMN_DESCRIPTION, themeEntity.getDescription())
-                .addValue(TABLE_COLUMN_THUMBNAIL, themeEntity.getThumbnail());
+                .addValue(TABLE_COLUMN_ID, entity.getId())
+                .addValue(TABLE_COLUMN_NAME, entity.getName())
+                .addValue(TABLE_COLUMN_DESCRIPTION, entity.getDescription())
+                .addValue(TABLE_COLUMN_THUMBNAIL, entity.getThumbnail());
 
         namedParameterJdbcTemplate.update(sql, sqlParameterSource, generatedKeyHolder);
 
         if (Objects.isNull(generatedKeyHolder.getKey())) {
-            return themeEntity;
+            return entity;
         }
 
-        return themeEntity.withId(generatedKeyHolder.getKey().longValue());
+        return entity.withId(generatedKeyHolder.getKey().longValue());
     }
 
     @Override
-    public Optional<ThemeEntity> findById(Long themeId) {
+    public Optional<ThemeEntity> findById(Long id) {
         String sql = "SELECT id, name, description, thumbnail FROM theme WHERE id = :id";
 
         MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource()
-                .addValue(TABLE_COLUMN_ID, themeId);
+                .addValue(TABLE_COLUMN_ID, id);
 
         try {
             return Optional.ofNullable(
@@ -94,11 +94,11 @@ public class MySQLJdbcThemeRepository implements ThemeJdbcRepository {
     }
 
     @Override
-    public void delete(Long themeId) {
+    public void delete(Long id) {
         String sql = "DELETE FROM theme WHERE id = :id";
 
         MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource()
-                .addValue(TABLE_COLUMN_ID, themeId);
+                .addValue(TABLE_COLUMN_ID, id);
 
         namedParameterJdbcTemplate.update(sql, sqlParameterSource);
     }

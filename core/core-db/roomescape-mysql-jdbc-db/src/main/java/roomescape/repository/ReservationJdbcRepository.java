@@ -8,13 +8,13 @@ import java.util.Optional;
 
 public interface ReservationJdbcRepository {
 
-    ReservationEntity save(ReservationEntity reservationEntity);
+    ReservationEntity save(ReservationEntity entity);
 
     List<ReservationEntity> findAll();
 
-    void delete(Long reservationId);
+    void delete(Long id);
 
-    Optional<ReservationEntity> findById(Long reservationId);
+    Optional<ReservationEntity> findById(Long id);
 
     List<ReservationViewProjection> findAllReservationViewProjection();
 

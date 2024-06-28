@@ -4,19 +4,29 @@ import org.springframework.stereotype.Component;
 import roomescape.application.error.exception.CreateReservationTimeValidateException;
 import roomescape.domain.reservationtime.ReservationTime;
 import roomescape.domain.reservationtime.ReservationTimeRepository;
+import roomescape.domain.theme.ThemeRepository;
 
 @Component
 public class CreateReservationTimeValidator {
 
-    private final ReservationTimeRepository repository;
+    private final ReservationTimeRepository timeRepository;
 
-    public CreateReservationTimeValidator(ReservationTimeRepository repository) {
-        this.repository = repository;
+    private final ThemeRepository themeRepository;
+
+    public CreateReservationTimeValidator(
+            ReservationTimeRepository timeRepository,
+            ThemeRepository themeRepository) {
+        this.timeRepository = timeRepository;
+        this.themeRepository = themeRepository;
     }
 
     public void validate(ReservationTime reservationTime) {
-        if (repository.existByDateAndCreateAt(reservationTime.getDate(), reservationTime.getStartAt())) {
-            throw CreateReservationTimeValidateException.existTime(reservationTime);
+        if (!themeRepository.existById(reservationTime.getThemeId())) {
+            throw CreateReservationTimeValidateException.notExistTheme(reservationTime.getThemeId());
+        }
+
+        if (timeRepository.existEquals(reservationTime)) {
+            throw CreateReservationTimeValidateException.existEquals(reservationTime);
         }
     }
 }

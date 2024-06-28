@@ -36,24 +36,24 @@ public class MySQLJdbcReservationRepository implements ReservationJdbcRepository
     }
 
     @Override
-    public ReservationEntity save(ReservationEntity reservationEntity) {
+    public ReservationEntity save(ReservationEntity entity) {
         String sql = "INSERT INTO reservation (id, name, time_id, theme_id) VALUES (:id, :name, :time_id, :theme_id) " +
                 "ON DUPLICATE KEY UPDATE name = VALUES(name), time_id = VALUES(time_id), theme_id = VALUES(theme_id)";
 
         GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
         MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource()
-                .addValue(TABLE_COLUMN_ID, reservationEntity.getId())
-                .addValue(TABLE_COLUMN_NAME, reservationEntity.getReservationName())
-                .addValue(TABLE_COLUMN_TIME_ID, reservationEntity.getReservationTimeId())
-                .addValue(TABLE_COLUMN_THEME_ID, reservationEntity.getThemeId());
+                .addValue(TABLE_COLUMN_ID, entity.getId())
+                .addValue(TABLE_COLUMN_NAME, entity.getReservationName())
+                .addValue(TABLE_COLUMN_TIME_ID, entity.getReservationTimeId())
+                .addValue(TABLE_COLUMN_THEME_ID, entity.getThemeId());
 
         namedParameterJdbcTemplate.update(sql, sqlParameterSource, generatedKeyHolder);
 
         if (Objects.isNull(generatedKeyHolder.getKey())) {
-            return reservationEntity;
+            return entity;
         }
 
-        return reservationEntity.withId(generatedKeyHolder.getKey().longValue());
+        return entity.withId(generatedKeyHolder.getKey().longValue());
     }
 
     @Override
@@ -77,21 +77,21 @@ public class MySQLJdbcReservationRepository implements ReservationJdbcRepository
     }
 
     @Override
-    public void delete(Long reservationId) {
+    public void delete(Long id) {
         String sql = "DELETE FROM reservation WHERE id = :id";
 
         MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource()
-                .addValue(TABLE_COLUMN_ID, reservationId);
+                .addValue(TABLE_COLUMN_ID, id);
 
         namedParameterJdbcTemplate.update(sql, sqlParameterSource);
     }
 
     @Override
-    public Optional<ReservationEntity> findById(Long reservationId) {
+    public Optional<ReservationEntity> findById(Long id) {
         String sql = "SELECT id, name, time_id, theme_id FROM reservation WHERE id = :id";
 
         MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource()
-                .addValue(TABLE_COLUMN_ID, reservationId);
+                .addValue(TABLE_COLUMN_ID, id);
 
         try {
             return Optional.ofNullable(

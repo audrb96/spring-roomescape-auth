@@ -9,6 +9,7 @@ import roomescape.util.validator.ObjectValidator;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class ReservationTime {
 
@@ -41,6 +42,10 @@ public class ReservationTime {
         return date.getFormat(pattern);
     }
 
+    public String getFormatDateTime(String pattern) {
+        return this.getDateTime().format(DateTimeFormatter.ofPattern(pattern));
+    }
+
     public Long getId() {
         return id.id();
     }
@@ -58,6 +63,10 @@ public class ReservationTime {
     }
 
     public boolean isBefore(LocalDateTime dateTime) {
-        return LocalDateTime.of(date.date(), startAt.startAt()).isBefore(dateTime);
+        return this.getDateTime().isBefore(dateTime);
+    }
+
+    private LocalDateTime getDateTime() {
+        return LocalDateTime.of(this.date.date(), this.startAt.startAt());
     }
 }

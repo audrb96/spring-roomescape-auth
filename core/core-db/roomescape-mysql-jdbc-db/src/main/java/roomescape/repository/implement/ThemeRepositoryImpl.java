@@ -44,4 +44,9 @@ public class ThemeRepositoryImpl implements ThemeRepository {
     public void delete(Long id) {
         repository.findById(id);
     }
+
+    @Override
+    public boolean existById(Long id) {
+        return repository.findById(id).isPresent();
+    }
 }
