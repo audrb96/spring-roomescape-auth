@@ -14,10 +14,13 @@ import roomescape.application.presentation.api.ReservationTimeCommandApi;
 import roomescape.application.presentation.api.dto.request.CreateReservationTimeRequest;
 import roomescape.application.presentation.api.dto.response.CreateReservationTimeResponse;
 import roomescape.application.service.ReservationTimeService;
+import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservationtime.ReservationTime;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.reservationtime.vo.ReservationTimeStartAt;
+import roomescape.domain.theme.vo.ThemeId;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -45,6 +48,8 @@ class ReservationTimeCommandApiTest {
     void setUp() {
         reservationTime = new ReservationTime(
                 new ReservationTimeId(1L),
+                new ThemeId(1L),
+                new ReservationDate(LocalDate.of(2024, 6, 28)),
                 new ReservationTimeStartAt(LocalTime.of(20, 21))
         );
     }
@@ -52,7 +57,7 @@ class ReservationTimeCommandApiTest {
     @Test
     @DisplayName("예약 시간 생성 API 컨트롤러 테스트")
     void createReservationTimeTest() throws Exception {
-        CreateReservationTimeRequest request = new CreateReservationTimeRequest("20:21");
+        CreateReservationTimeRequest request = new CreateReservationTimeRequest(1L, "2024-06-28", "20:21");
 
         given(reservationTimeService.create(any())).willReturn(reservationTime);
 

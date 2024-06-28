@@ -8,7 +8,6 @@ import roomescape.repository.ReservationJdbcRepository;
 import roomescape.repository.entity.ReservationEntity;
 import roomescape.repository.projection.ReservationViewProjection;
 
-import java.time.LocalDate;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -50,10 +49,5 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     @Override
     public boolean existByTimeId(Long timeId) {
         return repository.findByTimeId(timeId).isPresent();
-    }
-
-    @Override
-    public boolean existByDateAndTimeId(LocalDate date, Long timeId) {
-        return repository.findByDateAndTimeId(date, timeId).isPresent();
     }
 }

@@ -15,13 +15,10 @@ import roomescape.application.presentation.api.dto.request.CreateReservationRequ
 import roomescape.application.presentation.api.dto.response.CreateReservationResponse;
 import roomescape.application.service.ReservationCommandService;
 import roomescape.domain.reservation.Reservation;
-import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservation.vo.ReservationId;
 import roomescape.domain.reservation.vo.ReservationName;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.theme.vo.ThemeId;
-
-import java.time.LocalDate;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -49,7 +46,6 @@ class ReservationCommandApiTest {
         reservation = new Reservation(
                 new ReservationId(1L),
                 new ReservationName("kilian"),
-                new ReservationDate(LocalDate.of(2024, 6, 6)),
                 new ReservationTimeId(1L),
                 new ThemeId(1L)
         );
@@ -60,7 +56,7 @@ class ReservationCommandApiTest {
     void createReservationTest() throws Exception {
         String reservationName = "kilian";
         CreateReservationRequest createReservationRequest =
-                new CreateReservationRequest("2024-06-06", reservationName, 1L, 1L);
+                new CreateReservationRequest(reservationName, 1L, 1L);
 
         given(reservationCommandService.create(any()))
                 .willReturn(reservation);

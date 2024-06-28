@@ -11,11 +11,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import roomescape.application.presentation.api.ReservationTimeQueryApi;
 import roomescape.application.presentation.api.dto.response.FindAllReservationTimesResponse;
 import roomescape.application.service.ReservationTimeService;
+import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservationtime.ReservationTime;
 import roomescape.domain.reservationtime.ReservationTimes;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.reservationtime.vo.ReservationTimeStartAt;
+import roomescape.domain.theme.vo.ThemeId;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -41,6 +44,8 @@ class ReservationTimeQueryApiTest {
     void setUp() {
         ReservationTime reservationTime = new ReservationTime(
                 new ReservationTimeId(1L),
+                new ThemeId(1L),
+                new ReservationDate(LocalDate.of(2024, 6, 28)),
                 new ReservationTimeStartAt(LocalTime.of(16, 1))
         );
 
@@ -51,7 +56,7 @@ class ReservationTimeQueryApiTest {
     @DisplayName("예약시간 전체 조회 API 컨트롤러 테스트")
     void findAllReservationsTest() throws Exception {
         given(reservationTimeService.findAll()).willReturn(reservationTimes);
-        List<FindAllReservationTimesResponse> response = FindAllReservationTimesResponse.toFindAllReservationResponses(reservationTimes);
+        List<FindAllReservationTimesResponse> response = FindAllReservationTimesResponse.from(reservationTimes);
 
         mockMvc.perform(
                         get("/times")

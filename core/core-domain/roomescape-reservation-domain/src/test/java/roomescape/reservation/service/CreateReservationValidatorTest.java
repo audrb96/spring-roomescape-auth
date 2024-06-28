@@ -4,13 +4,14 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import roomescape.util.clockholder.ClockHolder;
+import roomescape.domain.reservation.validator.CreateReservationValidator;
 import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservationtime.ReservationTime;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.reservationtime.vo.ReservationTimeStartAt;
-import roomescape.domain.reservation.validator.CreateReservationValidator;
+import roomescape.domain.theme.vo.ThemeId;
 import roomescape.error.exception.CreateReservationValidateException;
+import roomescape.util.clockholder.ClockHolder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -31,9 +32,10 @@ class CreateReservationValidatorTest {
             void NotThrownException() {
                 Assertions.assertDoesNotThrow(
                         () -> CreateReservationValidator.validate(
-                                new ReservationDate(LocalDate.of(2024, 6, 17)),
                                 new ReservationTime(
                                         new ReservationTimeId(1L),
+                                        new ThemeId(1L),
+                                        new ReservationDate(LocalDate.of(2024, 6, 17)),
                                         new ReservationTimeStartAt(LocalTime.of(18, 0))
                                 ),
                                 new FakeClockHolder()
@@ -50,7 +52,7 @@ class CreateReservationValidatorTest {
         }
 
         @Nested
-        @DisplayName("예약 시간이 현재시간 이전이라면")
+        @DisplayName("예약 시간이 현재 시간 이전이라면")
         class reservationTimeIsBeforeNow {
 
             @Test
@@ -59,9 +61,10 @@ class CreateReservationValidatorTest {
                 Assertions.assertThrows(
                         CreateReservationValidateException.class,
                         () -> CreateReservationValidator.validate(
-                                new ReservationDate(LocalDate.of(2024, 6, 17)),
                                 new ReservationTime(
                                         new ReservationTimeId(1L),
+                                        new ThemeId(1L),
+                                        new ReservationDate(LocalDate.of(2024, 6, 17)),
                                         new ReservationTimeStartAt(LocalTime.of(18, 0))
                                 ),
                                 new FakeClockHolder()

@@ -19,12 +19,12 @@ public class FindAllReservationTimesResponse {
         this.startAt = startAt;
     }
 
-    private static FindAllReservationTimesResponse from(ReservationTime reservationTime) {
-        return new FindAllReservationTimesResponse(reservationTime.getId(), reservationTime.getFormatStartAt(TIME_PATTERN));
+    private static FindAllReservationTimesResponse from(ReservationTime time) {
+        return new FindAllReservationTimesResponse(time.getId(), time.getFormatStartAt(TIME_PATTERN));
     }
 
-    public static List<FindAllReservationTimesResponse> toFindAllReservationResponses(ReservationTimes reservationTimes) {
-        return reservationTimes.getReservationTimes().stream()
+    public static List<FindAllReservationTimesResponse> from(ReservationTimes times) {
+        return times.getReservationTimes().stream()
                 .map(FindAllReservationTimesResponse::from)
                 .collect(Collectors.toList());
     }

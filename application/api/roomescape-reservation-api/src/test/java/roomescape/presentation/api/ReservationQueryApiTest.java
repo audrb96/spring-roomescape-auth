@@ -51,8 +51,8 @@ class ReservationQueryApiTest {
         ReservationView reservationView = new ReservationView(
                 new ReservationId(1L),
                 new ReservationName("kilian"),
-                new ReservationDate(LocalDate.of(2024, 6, 6)),
                 new ReservationTimeId(1L),
+                new ReservationDate(LocalDate.of(2024, 6, 6)),
                 new ReservationTimeStartAt(LocalTime.of(18, 24)),
                 new ThemeId(1L),
                 new ThemeName("레벨2 탈출")

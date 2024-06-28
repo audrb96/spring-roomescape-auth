@@ -9,11 +9,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import roomescape.application.error.exception.CreateReservationTimeValidateException;
 import roomescape.application.service.component.validator.CreateReservationTimeValidator;
+import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservationtime.ReservationTime;
 import roomescape.domain.reservationtime.ReservationTimeRepository;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.reservationtime.vo.ReservationTimeStartAt;
+import roomescape.domain.theme.vo.ThemeId;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @SpringBootTest
@@ -30,6 +33,8 @@ class CreateReservationTimeValidatorTest {
         reservationTimeRepository.save(
                 new ReservationTime(
                         new ReservationTimeId(1L),
+                        new ThemeId(1L),
+                        new ReservationDate(LocalDate.of(2024, 6, 8)),
                         new ReservationTimeStartAt(LocalTime.of(12, 55))
                 )
         );
@@ -40,6 +45,8 @@ class CreateReservationTimeValidatorTest {
                 () -> validator.validate(
                         new ReservationTime(
                                 new ReservationTimeId(1L),
+                                new ThemeId(1L),
+                                new ReservationDate(LocalDate.of(2024, 6, 8)),
                                 new ReservationTimeStartAt(LocalTime.of(12, 55))
                         )));
     }

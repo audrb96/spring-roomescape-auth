@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import roomescape.repository.entity.ReservationTimeEntity;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -32,13 +33,25 @@ class MySQLJdbcReservationTimeRepositoryTest {
 
             @BeforeEach
             void setUp() {
-                mySQLJdbcReservationTimeRepository.save(new ReservationTimeEntity(1L, LocalTime.of(19, 44)));
+                mySQLJdbcReservationTimeRepository.save(
+                        new ReservationTimeEntity(
+                                1L,
+                                1L,
+                                LocalDate.of(2024, 6, 28),
+                                LocalTime.of(19, 44)
+                        )
+                );
             }
 
             @Test
             @DisplayName("업데이트 한다.")
             void updateEntity() {
-                ReservationTimeEntity expected = new ReservationTimeEntity(1L, LocalTime.of(19, 45));
+                ReservationTimeEntity expected = new ReservationTimeEntity(
+                        1L,
+                        1L,
+                        LocalDate.of(2024, 6, 28),
+                        LocalTime.of(19, 45)
+                );
 
                 mySQLJdbcReservationTimeRepository.save(expected);
                 ReservationTimeEntity actual = mySQLJdbcReservationTimeRepository.findById(1L)
@@ -55,7 +68,13 @@ class MySQLJdbcReservationTimeRepositoryTest {
             @Test
             @DisplayName("저장 한다.")
             void saveEntity() {
-                ReservationTimeEntity expected = new ReservationTimeEntity(null, LocalTime.of(20, 3));
+                ReservationTimeEntity expected = new ReservationTimeEntity(
+                        null,
+                        1L,
+                        LocalDate.of(2024, 6, 28),
+                        LocalTime.of(20, 3)
+                );
+
                 mySQLJdbcReservationTimeRepository.save(expected);
 
                 ReservationTimeEntity actual = mySQLJdbcReservationTimeRepository.findById(1L)
@@ -84,8 +103,11 @@ class MySQLJdbcReservationTimeRepositoryTest {
                 mySQLJdbcReservationTimeRepository.save(
                         new ReservationTimeEntity(
                                 1L,
+                                1L,
+                                LocalDate.of(2024, 6, 28),
                                 LocalTime.of(20, 10)
                         ));
+                
                 List<ReservationTimeEntity> savedEntities = mySQLJdbcReservationTimeRepository.findAll();
 
                 mySQLJdbcReservationTimeRepository.delete(1L);

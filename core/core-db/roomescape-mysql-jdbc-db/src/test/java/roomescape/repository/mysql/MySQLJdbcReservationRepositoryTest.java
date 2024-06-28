@@ -10,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import roomescape.repository.entity.ReservationEntity;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
@@ -37,7 +36,6 @@ class MySQLJdbcReservationRepositoryTest {
                         new ReservationEntity(
                                 1L,
                                 "kilian",
-                                LocalDate.of(2024, 6, 8),
                                 1L,
                                 1L
                         ));
@@ -49,7 +47,6 @@ class MySQLJdbcReservationRepositoryTest {
                 ReservationEntity expected = new ReservationEntity(
                         1L,
                         "brie",
-                        LocalDate.of(2024, 6, 8),
                         1L,
                         1L
                 );
@@ -73,7 +70,6 @@ class MySQLJdbcReservationRepositoryTest {
                 ReservationEntity expected = new ReservationEntity(
                         1L,
                         "kilian",
-                        LocalDate.of(2024, 6, 8),
                         1L,
                         1L
                 );
@@ -108,7 +104,6 @@ class MySQLJdbcReservationRepositoryTest {
                         new ReservationEntity(
                                 1L,
                                 "kilian",
-                                LocalDate.of(2024, 6, 8),
                                 1L,
                                 1L
                         ));

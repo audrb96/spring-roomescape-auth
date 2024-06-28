@@ -15,7 +15,7 @@ public class CreateReservationTimeValidator {
     }
 
     public void validate(ReservationTime reservationTime) {
-        if (repository.existByStartAt(reservationTime.getStartAt())) {
+        if (repository.existByDateAndCreateAt(reservationTime.getDate(), reservationTime.getStartAt())) {
             throw CreateReservationTimeValidateException.existTime(reservationTime);
         }
     }

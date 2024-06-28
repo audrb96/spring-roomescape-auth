@@ -15,9 +15,9 @@ public class ReservationView {
 
     private final ReservationName reservationName;
 
-    private final ReservationDate reservationDate;
-
     private final ReservationTimeId reservationTimeId;
+
+    private final ReservationDate reservationDate;
 
     private final ReservationTimeStartAt reservationTimeStartAt;
 
@@ -28,8 +28,8 @@ public class ReservationView {
     public ReservationView(
             ReservationId reservationId,
             ReservationName reservationName,
-            ReservationDate reservationDate,
             ReservationTimeId reservationTimeId,
+            ReservationDate reservationDate,
             ReservationTimeStartAt reservationTimeStartAt,
             ThemeId themeId,
             ThemeName themeName
@@ -37,8 +37,8 @@ public class ReservationView {
         ObjectValidator.validateNotNull(reservationId, reservationName, reservationDate, reservationTimeId, reservationTimeStartAt);
         this.reservationId = reservationId;
         this.reservationName = reservationName;
-        this.reservationDate = reservationDate;
         this.reservationTimeId = reservationTimeId;
+        this.reservationDate = reservationDate;
         this.reservationTimeStartAt = reservationTimeStartAt;
         this.themeId = themeId;
         this.themeName = themeName;
@@ -53,11 +53,11 @@ public class ReservationView {
     }
 
     public String getFormattedReservationDate(String pattern) {
-        return this.reservationDate.getFormatted(pattern);
+        return this.reservationDate.getFormat(pattern);
     }
 
     public String getFormattedReservationTimeStartAt(String pattern) {
-        return this.reservationTimeStartAt.getFormatted(pattern);
+        return this.reservationTimeStartAt.getFormat(pattern);
     }
 
     public Long getReservationTimeId() {

@@ -5,6 +5,7 @@ import roomescape.application.service.command.CreateReservationTimeCommand;
 import roomescape.application.service.command.DeleteReservationTimeCommand;
 import roomescape.application.service.component.creator.ReservationTimeCreator;
 import roomescape.application.service.component.remover.ReservationTimeRemover;
+import roomescape.application.service.query.FindAvailableTimesQuery;
 import roomescape.domain.reservationtime.ReservationTime;
 import roomescape.domain.reservationtime.ReservationTimeRepository;
 import roomescape.domain.reservationtime.ReservationTimes;
@@ -36,5 +37,9 @@ public class ReservationTimeService {
 
     public void delete(DeleteReservationTimeCommand command) {
         reservationTimeRemover.remove(command.getReservationTimeId());
+    }
+
+    public ReservationTimes findAvailableTimes(FindAvailableTimesQuery query) {
+        return null;
     }
 }

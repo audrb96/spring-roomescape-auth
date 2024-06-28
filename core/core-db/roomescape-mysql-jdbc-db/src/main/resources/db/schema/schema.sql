@@ -7,24 +7,27 @@ CREATE TABLE reservation
 (
     id       BIGINT       NOT NULL AUTO_INCREMENT,
     name     VARCHAR(255) NOT NULL,
-    date     DATE         NOT NULL,
     time_id  BIGINT,
     theme_id BIGINT,
 
     PRIMARY KEY (id)
 );
 
-CREATE INDEX time_id_idx ON reservation (time_id);
-CREATE INDEX theme_id_idx ON reservation (theme_id);
+CREATE INDEX time_id_idx_1 ON reservation (time_id);
+CREATE INDEX theme_id_idx_1 ON reservation (theme_id);
 
 
 CREATE TABLE reservation_time
 (
     id       BIGINT NOT NULL AUTO_INCREMENT,
+    theme_id BIGINT,
+    date     DATE         NOT NULL,
     start_at TIME   NOT NULL,
 
     PRIMARY KEY (id)
 );
+
+CREATE INDEX theme_id_idx_2 ON reservation_time (theme_id);
 
 CREATE TABLE theme
 (

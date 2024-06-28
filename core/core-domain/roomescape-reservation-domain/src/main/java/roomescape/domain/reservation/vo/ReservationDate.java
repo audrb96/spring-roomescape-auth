@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public record ReservationDate(LocalDate date) {
 
-    public String getFormatted(String pattern) {
+    public String getFormat(String pattern) {
         return this.date.format(DateTimeFormatter.ofPattern(pattern));
     }
 }

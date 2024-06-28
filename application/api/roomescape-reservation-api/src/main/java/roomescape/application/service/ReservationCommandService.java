@@ -41,7 +41,6 @@ public class ReservationCommandService {
 
         return reservationCreator.create(
                 command.getReservationName(),
-                command.getReservationDate(),
                 reservationTime,
                 theme
         );

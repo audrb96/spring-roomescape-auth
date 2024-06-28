@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public record ReservationTimeStartAt(LocalTime startAt) {
 
-    public String getFormatted(String pattern) {
+    public String getFormat(String pattern) {
         return startAt.format(DateTimeFormatter.ofPattern(pattern));
     }
 }

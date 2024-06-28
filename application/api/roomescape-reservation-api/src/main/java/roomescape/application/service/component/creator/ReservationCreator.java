@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 import roomescape.application.service.component.validator.CreateReservationValidator;
 import roomescape.domain.reservation.Reservation;
 import roomescape.domain.reservation.ReservationRepository;
-import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservation.vo.ReservationId;
 import roomescape.domain.reservation.vo.ReservationName;
 import roomescape.domain.reservationtime.ReservationTime;
@@ -26,16 +25,14 @@ public class ReservationCreator {
 
     public Reservation create(
             ReservationName reservationName,
-            ReservationDate reservationDate,
             ReservationTime reservationTime,
             Theme theme
     ) {
-        validator.validate(reservationDate, reservationTime);
+        validator.validate(reservationTime);
 
         Reservation createdReservation = Reservation.create(
                 ReservationId.empty(),
                 reservationName,
-                reservationDate,
                 reservationTime,
                 theme
         );

@@ -3,5 +3,7 @@ POST http://localhost:8080/times
 Content-Type: application/json
 
 {
+  "themeId": "1",
+  "date": "2025-06-27",
   "startAt": "20:14"
 }

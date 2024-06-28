@@ -7,6 +7,7 @@ import roomescape.domain.reservationtime.ReservationTimes;
 import roomescape.repository.ReservationTimeJdbcRepository;
 import roomescape.repository.entity.ReservationTimeEntity;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,8 +34,8 @@ public class ReservationTimeRepositoryImpl implements ReservationTimeRepository 
     }
 
     @Override
-    public boolean existByStartAt(LocalTime startAt) {
-        return repository.findByStartAt(startAt).isPresent();
+    public boolean existByDateAndCreateAt(LocalDate date, LocalTime startAt) {
+        return repository.findByDateAndStartAt(date, startAt).isPresent();
     }
 
     @Override
