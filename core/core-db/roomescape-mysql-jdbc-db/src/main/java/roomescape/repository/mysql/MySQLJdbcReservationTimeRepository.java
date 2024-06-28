@@ -1,5 +1,6 @@
 package roomescape.repository.mysql;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Component;
 import roomescape.repository.ReservationTimeJdbcRepository;
 import roomescape.repository.entity.ReservationTimeEntity;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -67,7 +69,7 @@ public class MySQLJdbcReservationTimeRepository implements ReservationTimeJdbcRe
                             )
                     )
             );
-        } catch (Exception ex) {
+        } catch (EmptyResultDataAccessException ex) {
             return Optional.empty();
         }
     }
@@ -95,7 +97,7 @@ public class MySQLJdbcReservationTimeRepository implements ReservationTimeJdbcRe
                             )
                     )
             );
-        } catch (Exception ex) {
+        } catch (EmptyResultDataAccessException ex) {
             return Optional.empty();
         }
     }
@@ -128,5 +130,30 @@ public class MySQLJdbcReservationTimeRepository implements ReservationTimeJdbcRe
                 .addValue(TABLE_COLUMN_ID, id);
 
         namedParameterJdbcTemplate.update(sql, sqlParameterSource);
+    }
+
+    @Override
+    public List<ReservationTimeEntity> findByDateAndThemeId(LocalDate date, Long themeId) {
+        String sql = "SELECT id, theme_id, date, start_at FROM reservation_time " +
+                "WHERE date = :date and theme_id = :theme_id";
+
+        MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource()
+                .addValue(TABLE_COLUMN_DATE, date)
+                .addValue(TABLE_COLUMN_THEME_ID, themeId);
+
+        return namedParameterJdbcTemplate.query(sql, sqlParameterSource, resultSet -> {
+            List<ReservationTimeEntity> reservationTimeEntities = new ArrayList<>();
+            while (resultSet.next()) {
+                reservationTimeEntities.add(
+                        new ReservationTimeEntity(
+                                resultSet.getLong(TABLE_COLUMN_ID),
+                                resultSet.getLong(TABLE_COLUMN_THEME_ID),
+                                resultSet.getDate(TABLE_COLUMN_DATE).toLocalDate(),
+                                resultSet.getTime(TABLE_COLUMN_START_AT).toLocalTime()
+                        )
+                );
+            }
+            return reservationTimeEntities;
+        });
     }
 }

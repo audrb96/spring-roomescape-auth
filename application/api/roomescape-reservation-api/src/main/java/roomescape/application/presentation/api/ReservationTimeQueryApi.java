@@ -28,7 +28,7 @@ public class ReservationTimeQueryApi {
         return ResponseEntity.ok(FindAllReservationTimesResponse.from(reservationTimes));
     }
 
-    @GetMapping("/times/available?date={date}&themeId={themeId}")
+    @GetMapping("/times/available")
     public ResponseEntity<List<FindAvailableTimesResponse>> findAvailableTimes(
             @Valid FindAvailableTimesRequest request
     ) {

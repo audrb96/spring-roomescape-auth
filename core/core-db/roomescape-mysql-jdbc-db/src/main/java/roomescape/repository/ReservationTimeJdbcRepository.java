@@ -2,6 +2,7 @@ package roomescape.repository;
 
 import roomescape.repository.entity.ReservationTimeEntity;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,4 +17,6 @@ public interface ReservationTimeJdbcRepository {
     List<ReservationTimeEntity> findAll();
 
     void delete(Long id);
+
+    List<ReservationTimeEntity> findByDateAndThemeId(LocalDate date, Long themeId);
 }

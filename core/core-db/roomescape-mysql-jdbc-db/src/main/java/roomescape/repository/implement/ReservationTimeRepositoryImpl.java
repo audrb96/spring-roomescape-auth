@@ -7,6 +7,7 @@ import roomescape.domain.reservationtime.ReservationTimes;
 import roomescape.repository.ReservationTimeJdbcRepository;
 import roomescape.repository.entity.ReservationTimeEntity;
 
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -48,5 +49,14 @@ public class ReservationTimeRepositoryImpl implements ReservationTimeRepository 
     @Override
     public void delete(Long timeId) {
         repository.delete(timeId);
+    }
+
+    @Override
+    public ReservationTimes findByDateAndThemeId(LocalDate date, Long themeId) {
+        return new ReservationTimes(
+                repository.findByDateAndThemeId(date, themeId).stream()
+                        .map(ReservationTimeEntity::toDomain)
+                        .collect(Collectors.toList())
+        );
     }
 }

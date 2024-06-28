@@ -10,12 +10,12 @@ public class FindAvailableTimesResponse {
 
     private static final String TIME_FORMAT = "HH:mm";
 
-    private final Long timeId;
+    private final Long id;
 
     private final String startAt;
 
-    public FindAvailableTimesResponse(Long timeId, String startAt) {
-        this.timeId = timeId;
+    public FindAvailableTimesResponse(Long id, String startAt) {
+        this.id = id;
         this.startAt = startAt;
     }
 
@@ -29,8 +29,8 @@ public class FindAvailableTimesResponse {
                 .collect(Collectors.toList());
     }
 
-    public Long getTimeId() {
-        return timeId;
+    public Long getId() {
+        return id;
     }
 
     public String getStartAt() {
