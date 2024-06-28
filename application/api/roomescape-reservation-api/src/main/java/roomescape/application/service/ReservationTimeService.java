@@ -39,7 +39,7 @@ public class ReservationTimeService {
         reservationTimeRemover.remove(command.getReservationTimeId());
     }
 
-    public ReservationTimes findAvailableTimes(FindAvailableTimesQuery query) {
+    public ReservationTimes findAvailable(FindAvailableTimesQuery query) {
         return reservationTimeRepository.findByDateAndThemeId(query.getDate(), query.getThemeId());
     }
 }

@@ -29,10 +29,10 @@ public class ReservationTimeQueryApi {
     }
 
     @GetMapping("/times/available")
-    public ResponseEntity<List<FindAvailableTimesResponse>> findAvailableTimes(
+    public ResponseEntity<List<FindAvailableTimesResponse>> findAvailable(
             @Valid FindAvailableTimesRequest request
     ) {
-        ReservationTimes times = reservationTimeService.findAvailableTimes(request.toQuery());
+        ReservationTimes times = reservationTimeService.findAvailable(request.toQuery());
 
         return ResponseEntity.ok(FindAvailableTimesResponse.from(times));
     }

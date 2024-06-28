@@ -10,6 +10,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import roomescape.application.presentation.api.ReservationTimeQueryApi;
 import roomescape.application.presentation.api.dto.response.FindAllReservationTimesResponse;
+import roomescape.application.presentation.api.dto.response.FindAvailableTimesResponse;
 import roomescape.application.service.ReservationTimeService;
 import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservationtime.ReservationTime;
@@ -22,6 +23,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -60,6 +62,21 @@ class ReservationTimeQueryApiTest {
 
         mockMvc.perform(
                         get("/times")
+                )
+                .andExpect(status().isOk())
+                .andExpect(content().string(objectMapper.writeValueAsString(response)));
+    }
+
+    @Test
+    @DisplayName("예약 가능 시간 조회 API 컨트롤러 테스트")
+    void findAvailableTest() throws Exception {
+        given(reservationTimeService.findAvailable(any())).willReturn(reservationTimes);
+        List<FindAvailableTimesResponse> response = FindAvailableTimesResponse.from(reservationTimes);
+
+        mockMvc.perform(
+                        get("/times/available")
+                                .param("date", "2024-06-28")
+                                .param("themeId", "1")
                 )
                 .andExpect(status().isOk())
                 .andExpect(content().string(objectMapper.writeValueAsString(response)));
