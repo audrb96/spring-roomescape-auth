@@ -6,10 +6,16 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import roomescape.domain.reservation.validator.CreateReservationValidator;
 import roomescape.domain.reservation.vo.ReservationDate;
+import roomescape.domain.reservation.vo.ReservationId;
+import roomescape.domain.reservation.vo.ReservationName;
 import roomescape.domain.reservationtime.ReservationTime;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.reservationtime.vo.ReservationTimeStartAt;
+import roomescape.domain.theme.Theme;
+import roomescape.domain.theme.vo.ThemeDescription;
 import roomescape.domain.theme.vo.ThemeId;
+import roomescape.domain.theme.vo.ThemeName;
+import roomescape.domain.theme.vo.ThemeThumbnail;
 import roomescape.error.exception.CreateReservationValidateException;
 import roomescape.util.clockholder.ClockHolder;
 
@@ -32,11 +38,19 @@ class CreateReservationValidatorTest {
             void NotThrownException() {
                 Assertions.assertDoesNotThrow(
                         () -> CreateReservationValidator.validate(
+                                ReservationId.empty(),
+                                new ReservationName("kilian"),
                                 new ReservationTime(
                                         new ReservationTimeId(1L),
                                         new ThemeId(1L),
                                         new ReservationDate(LocalDate.of(2024, 6, 17)),
                                         new ReservationTimeStartAt(LocalTime.of(18, 0))
+                                ),
+                                new Theme(
+                                        new ThemeId(1L),
+                                        new ThemeName("레벨2 탈출"),
+                                        new ThemeDescription("우테코 레벨2를 탈출하는 내용입니다."),
+                                        new ThemeThumbnail("https://i.pinimg.com/236x/6e/bc/46/6ebc461a94a49f9ea3b8bbe2204145d4.jpg")
                                 ),
                                 new FakeClockHolder()
                         ));
@@ -61,11 +75,19 @@ class CreateReservationValidatorTest {
                 Assertions.assertThrows(
                         CreateReservationValidateException.class,
                         () -> CreateReservationValidator.validate(
+                                ReservationId.empty(),
+                                new ReservationName("kilian"),
                                 new ReservationTime(
                                         new ReservationTimeId(1L),
                                         new ThemeId(1L),
                                         new ReservationDate(LocalDate.of(2024, 6, 17)),
                                         new ReservationTimeStartAt(LocalTime.of(18, 0))
+                                ),
+                                new Theme(
+                                        new ThemeId(1L),
+                                        new ThemeName("레벨2 탈출"),
+                                        new ThemeDescription("우테코 레벨2를 탈출하는 내용입니다."),
+                                        new ThemeThumbnail("https://i.pinimg.com/236x/6e/bc/46/6ebc461a94a49f9ea3b8bbe2204145d4.jpg")
                                 ),
                                 new FakeClockHolder()
                         )

@@ -55,7 +55,7 @@ public class ReservationEntity {
     }
 
     public Reservation toDomain() {
-        return new Reservation(
+        return Reservation.of(
                 new ReservationId(this.id),
                 new ReservationName(this.reservationName),
                 new ReservationTimeId(this.reservationTimeId),

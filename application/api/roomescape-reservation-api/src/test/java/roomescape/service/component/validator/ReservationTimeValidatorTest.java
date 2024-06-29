@@ -27,7 +27,7 @@ import static roomescape.application.error.code.ApplicationErrorCode.CANNOT_CREA
 import static roomescape.application.error.code.ApplicationErrorCode.CANNOT_CREATE_RESERVATION_TIME_NOT_EXIST_THEME;
 
 @ExtendWith(MockitoExtension.class)
-class CreateReservationTimeValidatorTest {
+class ReservationTimeValidatorTest {
 
     @InjectMocks
     private CreateReservationTimeValidator validator;

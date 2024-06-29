@@ -1,6 +1,7 @@
 package roomescape.domain.reservation;
 
 import roomescape.domain.reservation.validator.CreateReservationValidator;
+import roomescape.domain.reservation.validator.ReservationValidator;
 import roomescape.domain.reservation.vo.ReservationId;
 import roomescape.domain.reservation.vo.ReservationName;
 import roomescape.domain.reservationtime.ReservationTime;
@@ -8,7 +9,6 @@ import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.theme.Theme;
 import roomescape.domain.theme.vo.ThemeId;
 import roomescape.util.clockholder.SystemClockHolder;
-import roomescape.util.validator.ObjectValidator;
 
 public class Reservation {
 
@@ -21,13 +21,13 @@ public class Reservation {
     private final ThemeId themeId;
 
 
-    public Reservation(
+    private Reservation(
             ReservationId id,
             ReservationName name,
             ReservationTimeId timeId,
             ThemeId themeId
     ) {
-        ObjectValidator.validateNotNull(id, name, timeId, themeId);
+        ReservationValidator.validate(id, name, timeId, themeId);
         this.timeId = timeId;
         this.themeId = themeId;
         this.id = id;
@@ -40,14 +40,22 @@ public class Reservation {
             ReservationTime time,
             Theme theme
     ) {
-        CreateReservationValidator.validate(time, new SystemClockHolder());
-
+        CreateReservationValidator.validate(id, name, time, theme, new SystemClockHolder());
         return new Reservation(
                 id,
                 name,
                 new ReservationTimeId(time.getId()),
                 new ThemeId(theme.getId())
         );
+    }
+
+    public static Reservation of(
+            ReservationId id,
+            ReservationName name,
+            ReservationTimeId timeId,
+            ThemeId themeId
+    ) {
+        return new Reservation(id, name, timeId, themeId);
     }
 
     public Long getId() {

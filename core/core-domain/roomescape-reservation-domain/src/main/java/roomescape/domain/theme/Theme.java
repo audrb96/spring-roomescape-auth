@@ -1,10 +1,10 @@
 package roomescape.domain.theme;
 
+import roomescape.domain.theme.validator.ThemeValidator;
 import roomescape.domain.theme.vo.ThemeDescription;
 import roomescape.domain.theme.vo.ThemeId;
 import roomescape.domain.theme.vo.ThemeName;
 import roomescape.domain.theme.vo.ThemeThumbnail;
-import roomescape.util.validator.ObjectValidator;
 
 public class Theme {
 
@@ -22,7 +22,7 @@ public class Theme {
             ThemeDescription description,
             ThemeThumbnail thumbnail
     ) {
-        ObjectValidator.validateNotNull(themeId, name, description, thumbnail);
+        ThemeValidator.validate(themeId, name, description, thumbnail);
         this.id = themeId;
         this.name = name;
         this.description = description;

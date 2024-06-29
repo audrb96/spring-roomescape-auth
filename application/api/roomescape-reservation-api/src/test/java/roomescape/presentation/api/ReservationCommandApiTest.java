@@ -43,7 +43,7 @@ class ReservationCommandApiTest {
 
     @BeforeEach
     void setUp() {
-        reservation = new Reservation(
+        reservation = Reservation.of(
                 new ReservationId(1L),
                 new ReservationName("kilian"),
                 new ReservationTimeId(1L),

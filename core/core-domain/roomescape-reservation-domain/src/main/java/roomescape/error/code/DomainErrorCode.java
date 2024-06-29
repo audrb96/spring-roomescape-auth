@@ -2,6 +2,8 @@ package roomescape.error.code;
 
 public enum DomainErrorCode {
 
+    THIS_VALUE_NOT_TO_BE_EMPTY("이 값은 빈값이어서는 안됩니다."),
+    THIS_VALUE_TO_BE_NULL("이 값은 NULL 이어서는 안됩니다."),
     CANNOT_CREATE_RESERVATION_FOR_PAST_TIME("지나간 시간에는 예약을 할 수 없습니다."),
     NOT_FOUND_RESERVATION("예약을 찾을 수 없습니다."),
     NOT_FOUND_RESERVATION_TIME("예약 시간을 찾을 수 없습니다."),

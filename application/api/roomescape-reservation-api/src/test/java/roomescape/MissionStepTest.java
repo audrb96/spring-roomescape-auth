@@ -11,11 +11,16 @@ import roomescape.application.presentation.api.dto.request.CreateReservationRequ
 import roomescape.application.presentation.api.dto.request.CreateReservationTimeRequest;
 import roomescape.application.presentation.api.dto.request.CreateThemeRequest;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import static org.hamcrest.Matchers.is;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class MissionStepTest {
+
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
 
     @LocalServerPort
     private int port;
@@ -63,7 +68,11 @@ public class MissionStepTest {
                         1L
                 );
         CreateReservationTimeRequest createReservationTimeRequest =
-                new CreateReservationTimeRequest(1L, "2024-06-28", "21:11");
+                new CreateReservationTimeRequest(
+                        1L,
+                        LocalDate.now().plusDays(1L).format(DateTimeFormatter.ofPattern(DATE_FORMAT)),
+                        "21:11"
+                );
 
         CreateThemeRequest createThemeRequest = new CreateThemeRequest(
                 "레벨2 탈출",

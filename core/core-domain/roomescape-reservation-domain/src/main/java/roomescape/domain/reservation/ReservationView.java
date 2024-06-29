@@ -1,5 +1,6 @@
 package roomescape.domain.reservation;
 
+import roomescape.domain.reservation.validator.ReservationViewValidator;
 import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservation.vo.ReservationId;
 import roomescape.domain.reservation.vo.ReservationName;
@@ -7,7 +8,6 @@ import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.reservationtime.vo.ReservationTimeStartAt;
 import roomescape.domain.theme.vo.ThemeId;
 import roomescape.domain.theme.vo.ThemeName;
-import roomescape.util.validator.ObjectValidator;
 
 public class ReservationView {
 
@@ -34,7 +34,15 @@ public class ReservationView {
             ThemeId themeId,
             ThemeName themeName
     ) {
-        ObjectValidator.validateNotNull(reservationId, reservationName, reservationDate, reservationTimeId, reservationTimeStartAt);
+        ReservationViewValidator.validate(
+                reservationId,
+                reservationName,
+                reservationTimeId,
+                reservationDate,
+                reservationTimeStartAt,
+                themeId,
+                themeName
+        );
         this.reservationId = reservationId;
         this.reservationName = reservationName;
         this.reservationTimeId = reservationTimeId;

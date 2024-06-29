@@ -1,8 +1,8 @@
-package roomescape.domain.reservation.vo;
+package roomescape.domain.user.vo;
 
 import roomescape.util.StringUtils;
 
-public record ReservationName(String name) {
+public record UserName(String name) {
 
     public boolean isEmpty() {
         return StringUtils.isEmpty(name);

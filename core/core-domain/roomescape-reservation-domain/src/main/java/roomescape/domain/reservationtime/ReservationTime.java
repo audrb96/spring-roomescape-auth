@@ -1,15 +1,14 @@
 package roomescape.domain.reservationtime;
 
 import roomescape.domain.reservation.vo.ReservationDate;
+import roomescape.domain.reservationtime.validator.ReservationTimeValidator;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.reservationtime.vo.ReservationTimeStartAt;
 import roomescape.domain.theme.vo.ThemeId;
-import roomescape.util.validator.ObjectValidator;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 public class ReservationTime {
 
@@ -27,7 +26,7 @@ public class ReservationTime {
             ReservationDate date,
             ReservationTimeStartAt startAt
     ) {
-        ObjectValidator.validateNotNull(id, date, startAt);
+        ReservationTimeValidator.validate(id, themeId, date, startAt);
         this.themeId = themeId;
         this.id = id;
         this.date = date;
@@ -40,10 +39,6 @@ public class ReservationTime {
 
     public String getFormatDate(String pattern) {
         return date.getFormat(pattern);
-    }
-
-    public String getFormatDateTime(String pattern) {
-        return this.getDateTime().format(DateTimeFormatter.ofPattern(pattern));
     }
 
     public Long getId() {
