@@ -57,6 +57,11 @@ public class MissionStepTest {
                 .when().get("/reservation")
                 .then().log().all()
                 .statusCode(200);
+
+        RestAssured.given().log().all()
+                .when().get("/login")
+                .then().log().all()
+                .statusCode(200);
     }
 
     @Test

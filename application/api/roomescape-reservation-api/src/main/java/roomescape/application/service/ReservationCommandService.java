@@ -15,11 +15,8 @@ import roomescape.domain.theme.Theme;
 public class ReservationCommandService {
 
     private final ReservationRepository reservationRepository;
-
     private final ReservationTimeReader reservationTimeReader;
-
     private final ThemeReader themeReader;
-
     private final ReservationCreator reservationCreator;
 
 
@@ -39,11 +36,7 @@ public class ReservationCommandService {
         ReservationTime reservationTime = reservationTimeReader.readById(command.getReservationTimeId());
         Theme theme = themeReader.readById(command.getThemeId());
 
-        return reservationCreator.create(
-                command.getReservationName(),
-                reservationTime,
-                theme
-        );
+        return reservationCreator.create(command.getReservationName(), reservationTime, theme);
     }
 
     public void delete(DeleteReservationCommand command) {
