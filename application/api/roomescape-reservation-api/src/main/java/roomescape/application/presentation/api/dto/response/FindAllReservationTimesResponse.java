@@ -20,7 +20,7 @@ public class FindAllReservationTimesResponse {
     }
 
     private static FindAllReservationTimesResponse from(ReservationTime time) {
-        return new FindAllReservationTimesResponse(time.getId(), time.getFormatStartAt(TIME_PATTERN));
+        return new FindAllReservationTimesResponse(time.getId().id(), time.getFormatStartAt(TIME_PATTERN));
     }
 
     public static List<FindAllReservationTimesResponse> from(ReservationTimes times) {

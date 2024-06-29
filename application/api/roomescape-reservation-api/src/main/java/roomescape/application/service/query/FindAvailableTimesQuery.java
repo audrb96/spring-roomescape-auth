@@ -1,5 +1,8 @@
 package roomescape.application.service.query;
 
+import roomescape.domain.reservation.vo.ReservationDate;
+import roomescape.domain.theme.vo.ThemeId;
+
 import java.time.LocalDate;
 
 public class FindAvailableTimesQuery {
@@ -13,11 +16,11 @@ public class FindAvailableTimesQuery {
         this.themeId = themeId;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public ReservationDate toReservationDate() {
+        return new ReservationDate(date);
     }
 
-    public Long getThemeId() {
-        return themeId;
+    public ThemeId toThemeId() {
+        return new ThemeId(themeId);
     }
 }

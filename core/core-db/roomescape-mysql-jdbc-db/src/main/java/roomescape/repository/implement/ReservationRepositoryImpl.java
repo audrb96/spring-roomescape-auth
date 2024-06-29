@@ -4,6 +4,8 @@ import org.springframework.stereotype.Repository;
 import roomescape.domain.reservation.Reservation;
 import roomescape.domain.reservation.ReservationRepository;
 import roomescape.domain.reservation.ReservationViews;
+import roomescape.domain.reservation.vo.ReservationId;
+import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.repository.ReservationJdbcRepository;
 import roomescape.repository.entity.ReservationEntity;
 import roomescape.repository.projection.ReservationViewProjection;
@@ -27,13 +29,13 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     }
 
     @Override
-    public void delete(Long id) {
-        repository.delete(id);
+    public void delete(ReservationId id) {
+        repository.delete(id.id());
     }
 
     @Override
-    public Optional<Reservation> findById(Long reservationId) {
-        return repository.findById(reservationId)
+    public Optional<Reservation> findById(ReservationId id) {
+        return repository.findById(id.id())
                 .map(ReservationEntity::toDomain);
     }
 
@@ -47,7 +49,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     }
 
     @Override
-    public boolean existByTimeId(Long timeId) {
-        return repository.findByTimeId(timeId).isPresent();
+    public boolean existByTimeId(ReservationTimeId timeId) {
+        return repository.findByTimeId(timeId.id()).isPresent();
     }
 }

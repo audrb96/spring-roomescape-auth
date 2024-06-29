@@ -21,10 +21,10 @@ public class CreateThemeResponse {
 
     public static CreateThemeResponse from(Theme theme) {
         return new CreateThemeResponse(
-                theme.getId(),
-                theme.getName(),
-                theme.getDescription(),
-                theme.getThumbnail()
+                theme.getId().id(),
+                theme.getName().name(),
+                theme.getDescription().description(),
+                theme.getThumbnail().thumbnail()
         );
     }
 

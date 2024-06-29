@@ -1,17 +1,19 @@
 package roomescape.domain.theme;
 
 
+import roomescape.domain.theme.vo.ThemeId;
+
 import java.util.Optional;
 
 public interface ThemeRepository {
 
     Theme save(Theme theme);
 
-    Optional<Theme> findById(Long id);
+    Optional<Theme> findById(ThemeId id);
 
     Themes findAll();
 
-    void delete(Long id);
+    void delete(ThemeId id);
 
-    boolean existById(Long id);
+    boolean existById(ThemeId id);
 }

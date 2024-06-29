@@ -44,8 +44,8 @@ public class Reservation {
         return new Reservation(
                 id,
                 name,
-                new ReservationTimeId(time.getId()),
-                new ThemeId(theme.getId())
+                time.getId(),
+                theme.getId()
         );
     }
 
@@ -58,19 +58,19 @@ public class Reservation {
         return new Reservation(id, name, timeId, themeId);
     }
 
-    public Long getId() {
-        return id.id();
+    public ReservationId getId() {
+        return this.id;
     }
 
-    public String getName() {
-        return name.name();
+    public ReservationName getName() {
+        return this.name;
     }
 
-    public Long getReservationTimeId() {
-        return timeId.id();
+    public ReservationTimeId getTimeId() {
+        return this.timeId;
     }
 
-    public Long getThemeId() {
-        return this.themeId.id();
+    public ThemeId getThemeId() {
+        return this.themeId;
     }
 }

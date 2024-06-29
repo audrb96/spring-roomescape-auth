@@ -29,19 +29,19 @@ public class Theme {
         this.thumbnail = thumbnail;
     }
 
-    public Long getId() {
-        return id.id();
+    public ThemeId getId() {
+        return this.id;
     }
 
-    public String getName() {
-        return this.name.name();
+    public ThemeName getName() {
+        return this.name;
     }
 
-    public String getDescription() {
-        return this.description.description();
+    public ThemeDescription getDescription() {
+        return this.description;
     }
 
-    public String getThumbnail() {
-        return this.thumbnail.thumbnail();
+    public ThemeThumbnail getThumbnail() {
+        return this.thumbnail;
     }
 }

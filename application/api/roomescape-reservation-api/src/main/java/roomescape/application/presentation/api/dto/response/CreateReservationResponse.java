@@ -23,10 +23,10 @@ public class CreateReservationResponse {
 
     public static CreateReservationResponse from(Reservation reservation) {
         return new CreateReservationResponse(
-                reservation.getId(),
-                reservation.getName(),
-                reservation.getReservationTimeId(),
-                reservation.getThemeId()
+                reservation.getId().id(),
+                reservation.getName().name(),
+                reservation.getTimeId().id(),
+                reservation.getThemeId().id()
         );
     }
 

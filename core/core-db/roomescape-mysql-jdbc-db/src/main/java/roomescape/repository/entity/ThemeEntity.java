@@ -25,10 +25,10 @@ public class ThemeEntity {
 
     public static ThemeEntity from(Theme theme) {
         return new ThemeEntity(
-                theme.getId(),
-                theme.getName(),
-                theme.getDescription(),
-                theme.getThumbnail()
+                theme.getId().id(),
+                theme.getName().name(),
+                theme.getDescription().description(),
+                theme.getThumbnail().thumbnail()
         );
     }
 

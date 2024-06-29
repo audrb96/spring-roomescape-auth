@@ -24,7 +24,7 @@ public class ReservationCommandApi {
     public ResponseEntity<CreateReservationResponse> createReservation(@RequestBody @Valid CreateReservationRequest request) {
         Reservation reservation = reservationCommandService.create(request.toCreateReservationCommand());
 
-        return ResponseEntity.created(URI.create(String.format("/reservations/%d", reservation.getId())))
+        return ResponseEntity.created(URI.create(String.format("/reservations/%d", reservation.getId().id())))
                 .body(CreateReservationResponse.from(reservation));
     }
 

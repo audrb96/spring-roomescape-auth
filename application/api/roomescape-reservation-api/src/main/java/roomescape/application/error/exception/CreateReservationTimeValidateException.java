@@ -4,6 +4,7 @@ import roomescape.application.error.code.ApplicationErrorCode;
 import roomescape.application.error.key.ApplicationErrorKey;
 import roomescape.application.error.key.ApplicationErrorKeys;
 import roomescape.domain.reservationtime.ReservationTime;
+import roomescape.domain.theme.vo.ThemeId;
 
 import static roomescape.application.error.code.ApplicationErrorCode.CANNOT_CREATE_EXIST_RESERVATION_TIME;
 import static roomescape.application.error.code.ApplicationErrorCode.CANNOT_CREATE_RESERVATION_TIME_NOT_EXIST_THEME;
@@ -41,13 +42,13 @@ public class CreateReservationTimeValidateException extends ApplicationException
         );
     }
 
-    public static CreateReservationTimeValidateException notExistTheme(Long id) {
+    public static CreateReservationTimeValidateException notExistTheme(ThemeId id) {
         return new CreateReservationTimeValidateException(
                 CANNOT_CREATE_RESERVATION_TIME_NOT_EXIST_THEME,
                 ApplicationErrorKeys.of(
                         new ApplicationErrorKey(
                                 ERROR_KEY_NAME_THEME_ID,
-                                id.toString()
+                                id.id().toString()
                         )
                 )
         );

@@ -24,8 +24,8 @@ public class CreateReservationTimeResponse {
 
     public static CreateReservationTimeResponse from(ReservationTime reservationTime) {
         return new CreateReservationTimeResponse(
-                reservationTime.getId(),
-                reservationTime.getThemeId(),
+                reservationTime.getId().id(),
+                reservationTime.getThemeId().id(),
                 reservationTime.getFormatDate(DATE_PATTEN),
                 reservationTime.getFormatStartAt(START_AT_PATTEN)
         );

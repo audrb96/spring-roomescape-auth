@@ -27,7 +27,7 @@ public class ReservationTimeCommandApi {
         ReservationTime reservationTime = reservationTimeService.create(request.toCommand());
 
         return ResponseEntity
-                .created(URI.create(String.format("/times/%d", reservationTime.getId())))
+                .created(URI.create(String.format("/times/%d", reservationTime.getId().id())))
                 .body(CreateReservationTimeResponse.from(reservationTime));
     }
 

@@ -28,10 +28,10 @@ public class ReservationTimeEntity {
 
     public static ReservationTimeEntity from(ReservationTime reservationTime) {
         return new ReservationTimeEntity(
-                reservationTime.getId(),
-                reservationTime.getThemeId(),
-                reservationTime.getDate(),
-                reservationTime.getStartAt()
+                reservationTime.getId().id(),
+                reservationTime.getThemeId().id(),
+                reservationTime.getDate().date(),
+                reservationTime.getStartAt().startAt()
         );
     }
 

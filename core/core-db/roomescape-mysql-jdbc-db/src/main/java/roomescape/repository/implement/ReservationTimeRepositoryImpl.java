@@ -1,13 +1,15 @@
 package roomescape.repository.implement;
 
 import org.springframework.stereotype.Repository;
+import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservationtime.ReservationTime;
 import roomescape.domain.reservationtime.ReservationTimeRepository;
 import roomescape.domain.reservationtime.ReservationTimes;
+import roomescape.domain.reservationtime.vo.ReservationTimeId;
+import roomescape.domain.theme.vo.ThemeId;
 import roomescape.repository.ReservationTimeJdbcRepository;
 import roomescape.repository.entity.ReservationTimeEntity;
 
-import java.time.LocalDate;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -27,8 +29,8 @@ public class ReservationTimeRepositoryImpl implements ReservationTimeRepository 
     }
 
     @Override
-    public Optional<ReservationTime> findById(Long timeId) {
-        return repository.findById(timeId)
+    public Optional<ReservationTime> findById(ReservationTimeId id) {
+        return repository.findById(id.id())
                 .map(ReservationTimeEntity::toDomain);
     }
 
@@ -47,14 +49,14 @@ public class ReservationTimeRepositoryImpl implements ReservationTimeRepository 
     }
 
     @Override
-    public void delete(Long timeId) {
-        repository.delete(timeId);
+    public void delete(ReservationTimeId id) {
+        repository.delete(id.id());
     }
 
     @Override
-    public ReservationTimes findByDateAndThemeId(LocalDate date, Long themeId) {
+    public ReservationTimes findByDateAndThemeId(ReservationDate date, ThemeId themeId) {
         return new ReservationTimes(
-                repository.findByDateAndThemeId(date, themeId).stream()
+                repository.findByDateAndThemeId(date.date(), themeId.id()).stream()
                         .map(ReservationTimeEntity::toDomain)
                         .collect(Collectors.toList())
         );

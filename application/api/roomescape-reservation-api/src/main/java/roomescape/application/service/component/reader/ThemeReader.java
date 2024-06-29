@@ -16,7 +16,7 @@ public class ThemeReader {
     }
 
     public Theme readById(ThemeId id) {
-        return repository.findById(id.id())
-                .orElseThrow(() -> NotFoundDomainException.notFoundTheme(id.id()));
+        return repository.findById(id)
+                .orElseThrow(() -> NotFoundDomainException.notFoundTheme(id));
     }
 }

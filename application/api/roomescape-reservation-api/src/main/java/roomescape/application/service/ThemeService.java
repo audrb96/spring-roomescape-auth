@@ -25,6 +25,6 @@ public class ThemeService {
     }
 
     public void delete(DeleteThemeCommand command) {
-        themeRepository.delete(command.getThemeId());
+        themeRepository.delete(command.toThemeId());
     }
 }

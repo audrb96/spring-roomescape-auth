@@ -25,7 +25,7 @@ public class ThemeCommandApi {
         Theme theme = themeService.create(request.toCommand());
 
         return ResponseEntity
-                .created(URI.create(String.format("/themes/%d", theme.getId())))
+                .created(URI.create(String.format("/themes/%d", theme.getId().id())))
                 .body(CreateThemeResponse.from(theme));
     }
 

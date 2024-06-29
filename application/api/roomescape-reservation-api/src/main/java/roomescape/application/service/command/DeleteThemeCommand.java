@@ -1,5 +1,7 @@
 package roomescape.application.service.command;
 
+import roomescape.domain.theme.vo.ThemeId;
+
 public class DeleteThemeCommand {
 
     private final Long themeId;
@@ -8,7 +10,7 @@ public class DeleteThemeCommand {
         this.themeId = themeId;
     }
 
-    public Long getThemeId() {
-        return themeId;
+    public ThemeId toThemeId() {
+        return new ThemeId(themeId);
     }
 }

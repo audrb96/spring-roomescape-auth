@@ -15,7 +15,7 @@ public class DeleteReservationTimeValidator {
     }
 
     public void validate(ReservationTimeId timeId) {
-        if (reservationRepository.existByTimeId(timeId.id())) {
+        if (reservationRepository.existByTimeId(timeId)) {
             throw DeleteReservationTimeValidateException.existReservation(timeId);
         }
     }

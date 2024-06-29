@@ -47,6 +47,6 @@ public class ReservationCommandService {
     }
 
     public void delete(DeleteReservationCommand command) {
-        reservationRepository.delete(command.getReservationId());
+        reservationRepository.delete(command.toReservationId());
     }
 }

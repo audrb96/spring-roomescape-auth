@@ -20,7 +20,7 @@ public class FindAvailableTimesResponse {
     }
 
     public static FindAvailableTimesResponse from(ReservationTime time) {
-        return new FindAvailableTimesResponse(time.getId(), time.getFormatStartAt(TIME_FORMAT));
+        return new FindAvailableTimesResponse(time.getId().id(), time.getFormatStartAt(TIME_FORMAT));
     }
 
     public static List<FindAvailableTimesResponse> from(ReservationTimes times) {

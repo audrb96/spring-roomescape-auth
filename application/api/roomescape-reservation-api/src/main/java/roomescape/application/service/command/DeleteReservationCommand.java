@@ -1,5 +1,7 @@
 package roomescape.application.service.command;
 
+import roomescape.domain.reservation.vo.ReservationId;
+
 public class DeleteReservationCommand {
 
     private final Long reservationId;
@@ -8,7 +10,7 @@ public class DeleteReservationCommand {
         this.reservationId = reservationId;
     }
 
-    public Long getReservationId() {
-        return this.reservationId;
+    public ReservationId toReservationId() {
+        return new ReservationId(this.reservationId);
     }
 }

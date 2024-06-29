@@ -6,9 +6,7 @@ import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.reservationtime.vo.ReservationTimeStartAt;
 import roomescape.domain.theme.vo.ThemeId;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class ReservationTime {
 
@@ -41,20 +39,20 @@ public class ReservationTime {
         return date.getFormat(pattern);
     }
 
-    public Long getId() {
-        return id.id();
+    public ReservationTimeId getId() {
+        return id;
     }
 
-    public LocalDate getDate() {
-        return date.date();
+    public ThemeId getThemeId() {
+        return themeId;
     }
 
-    public LocalTime getStartAt() {
-        return this.startAt.startAt();
+    public ReservationDate getDate() {
+        return date;
     }
 
-    public Long getThemeId() {
-        return this.themeId.id();
+    public ReservationTimeStartAt getStartAt() {
+        return startAt;
     }
 
     public boolean isBefore(LocalDateTime dateTime) {

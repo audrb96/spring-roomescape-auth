@@ -7,6 +7,7 @@ import roomescape.domain.reservationtime.vo.ReservationTimeId;
 
 @Component
 public class ReservationTimeRemover {
+
     private final ReservationTimeRepository repository;
     private final DeleteReservationTimeValidator validator;
 
@@ -20,6 +21,6 @@ public class ReservationTimeRemover {
 
     public void remove(ReservationTimeId id) {
         validator.validate(id);
-        repository.delete(id.id());
+        repository.delete(id);
     }
 }

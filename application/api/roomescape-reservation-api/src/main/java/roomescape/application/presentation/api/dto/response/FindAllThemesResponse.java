@@ -25,10 +25,10 @@ public class FindAllThemesResponse {
 
     private static FindAllThemesResponse from(Theme theme) {
         return new FindAllThemesResponse(
-                theme.getId(),
-                theme.getName(),
-                theme.getDescription(),
-                theme.getThumbnail()
+                theme.getId().id(),
+                theme.getName().name(),
+                theme.getDescription().description(),
+                theme.getThumbnail().thumbnail()
         );
     }
 

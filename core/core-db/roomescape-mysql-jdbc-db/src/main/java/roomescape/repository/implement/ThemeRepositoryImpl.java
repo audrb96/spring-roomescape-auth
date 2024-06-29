@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import roomescape.domain.theme.Theme;
 import roomescape.domain.theme.ThemeRepository;
 import roomescape.domain.theme.Themes;
+import roomescape.domain.theme.vo.ThemeId;
 import roomescape.repository.entity.ThemeEntity;
 import roomescape.repository.mysql.MySQLJdbcThemeRepository;
 
@@ -26,8 +27,8 @@ public class ThemeRepositoryImpl implements ThemeRepository {
     }
 
     @Override
-    public Optional<Theme> findById(Long id) {
-        return repository.findById(id)
+    public Optional<Theme> findById(ThemeId id) {
+        return repository.findById(id.id())
                 .map(ThemeEntity::toDomain);
     }
 
@@ -41,12 +42,12 @@ public class ThemeRepositoryImpl implements ThemeRepository {
     }
 
     @Override
-    public void delete(Long id) {
-        repository.findById(id);
+    public void delete(ThemeId id) {
+        repository.findById(id.id());
     }
 
     @Override
-    public boolean existById(Long id) {
-        return repository.findById(id).isPresent();
+    public boolean existById(ThemeId id) {
+        return repository.findById(id.id()).isPresent();
     }
 }
