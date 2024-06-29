@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import roomescape.domain.reservation.validator.CreateReservationValidator;
+import roomescape.domain.reservation.vo.CreateReservationTime;
 import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservation.vo.ReservationId;
 import roomescape.domain.reservation.vo.ReservationName;
@@ -17,7 +18,6 @@ import roomescape.domain.theme.vo.ThemeId;
 import roomescape.domain.theme.vo.ThemeName;
 import roomescape.domain.theme.vo.ThemeThumbnail;
 import roomescape.error.exception.CreateReservationValidateException;
-import roomescape.util.clockholder.ClockHolder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -52,16 +52,8 @@ class CreateReservationValidatorTest {
                                         new ThemeDescription("우테코 레벨2를 탈출하는 내용입니다."),
                                         new ThemeThumbnail("https://i.pinimg.com/236x/6e/bc/46/6ebc461a94a49f9ea3b8bbe2204145d4.jpg")
                                 ),
-                                new FakeClockHolder()
+                                new CreateReservationTime(LocalDateTime.of(2024, 6, 17, 17, 59))
                         ));
-            }
-
-            private class FakeClockHolder implements ClockHolder {
-
-                @Override
-                public LocalDateTime getCurrentTime() {
-                    return LocalDateTime.of(2024, 6, 17, 17, 59);
-                }
             }
         }
 
@@ -89,17 +81,10 @@ class CreateReservationValidatorTest {
                                         new ThemeDescription("우테코 레벨2를 탈출하는 내용입니다."),
                                         new ThemeThumbnail("https://i.pinimg.com/236x/6e/bc/46/6ebc461a94a49f9ea3b8bbe2204145d4.jpg")
                                 ),
-                                new FakeClockHolder()
+                                new CreateReservationTime(LocalDateTime.of(2024, 6, 17, 18, 1))
+
                         )
                 );
-            }
-
-            private class FakeClockHolder implements ClockHolder {
-
-                @Override
-                public LocalDateTime getCurrentTime() {
-                    return LocalDateTime.of(2024, 6, 17, 18, 1);
-                }
             }
         }
     }

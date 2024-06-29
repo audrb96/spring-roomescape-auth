@@ -1,5 +1,6 @@
 package roomescape.domain.reservationtime;
 
+import roomescape.domain.reservation.vo.CreateReservationTime;
 import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservationtime.validator.ReservationTimeValidator;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
@@ -55,8 +56,8 @@ public class ReservationTime {
         return startAt;
     }
 
-    public boolean isBefore(LocalDateTime dateTime) {
-        return this.getDateTime().isBefore(dateTime);
+    public boolean isCreateTimeBefore(CreateReservationTime createTime) {
+        return this.getDateTime().isBefore(createTime.time());
     }
 
     private LocalDateTime getDateTime() {

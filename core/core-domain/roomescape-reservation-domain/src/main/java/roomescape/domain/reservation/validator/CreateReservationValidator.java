@@ -1,14 +1,13 @@
 package roomescape.domain.reservation.validator;
 
+import roomescape.domain.reservation.vo.CreateReservationTime;
 import roomescape.domain.reservation.vo.ReservationId;
 import roomescape.domain.reservation.vo.ReservationName;
 import roomescape.domain.reservationtime.ReservationTime;
 import roomescape.domain.theme.Theme;
 import roomescape.error.exception.CreateReservationValidateException;
 import roomescape.error.exception.DomainValidateException;
-import roomescape.util.clockholder.ClockHolder;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 public final class CreateReservationValidator {
@@ -22,17 +21,15 @@ public final class CreateReservationValidator {
             ReservationName name,
             ReservationTime time,
             Theme theme,
-            ClockHolder clockHolder
+            CreateReservationTime createTime
     ) {
-        validateNotNull(id, name, time, theme, clockHolder);
+        validateNotNull(id, name, time, theme, createTime);
         validateNotEmpty(name);
-        validateFuture(time, clockHolder);
+        validateFuture(time, createTime);
     }
 
-    private static void validateFuture(ReservationTime time, ClockHolder clockHolder) {
-        LocalDateTime currentTime = clockHolder.getCurrentTime();
-
-        if (time.isBefore(currentTime)) {
+    private static void validateFuture(ReservationTime time, CreateReservationTime createTime) {
+        if (time.isCreateTimeBefore(createTime)) {
             throw CreateReservationValidateException.pastTime(time);
         }
     }
@@ -42,7 +39,7 @@ public final class CreateReservationValidator {
             ReservationName name,
             ReservationTime time,
             Theme theme,
-            ClockHolder clockHolder
+            CreateReservationTime createTime
     ) {
         if (Objects.isNull(id)) {
             throw DomainValidateException.notToBeNull(ReservationId.class);
@@ -56,8 +53,8 @@ public final class CreateReservationValidator {
         if (Objects.isNull(theme)) {
             throw DomainValidateException.notToBeNull(Theme.class);
         }
-        if (Objects.isNull(clockHolder)) {
-            throw DomainValidateException.notToBeNull(ClockHolder.class);
+        if (Objects.isNull(createTime)) {
+            throw DomainValidateException.notToBeNull(CreateReservationTime.class);
         }
     }
 
