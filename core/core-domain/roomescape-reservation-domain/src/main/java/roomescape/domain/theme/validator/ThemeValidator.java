@@ -21,19 +21,6 @@ public final class ThemeValidator {
             ThemeThumbnail thumbnail
     ) {
         validateNotNull(themeId, name, description, thumbnail);
-        validateNotEmpty(name, description, thumbnail);
-    }
-
-    private static void validateNotEmpty(ThemeName name, ThemeDescription description, ThemeThumbnail thumbnail) {
-        if (name.isEmpty()) {
-            throw DomainValidateException.notToBeEmpty(name.getClass());
-        }
-        if (description.isEmpty()) {
-            throw DomainValidateException.notToBeEmpty(description.getClass());
-        }
-        if (thumbnail.isEmpty()) {
-            throw DomainValidateException.notToBeEmpty(thumbnail.getClass());
-        }
     }
 
     private static void validateNotNull(

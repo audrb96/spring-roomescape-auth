@@ -25,15 +25,15 @@ public class FindAllReservationsResponse {
 
     private static FindAllReservationsResponse from(ReservationView reservationView) {
         return new FindAllReservationsResponse(
-                reservationView.getReservationId(),
-                reservationView.getReservationName(),
-                reservationView.getFormattedReservationDate(DATE_PATTERN),
+                reservationView.getReservationId().id(),
+                reservationView.getReservationName().name(),
+                reservationView.getFormatReservationDate(DATE_PATTERN),
                 new Time(
-                        reservationView.getReservationTimeId(),
-                        reservationView.getFormattedReservationTimeStartAt(TIME_PATTERN)
+                        reservationView.getReservationTimeId().id(),
+                        reservationView.getFormatReservationTimeStartAt(TIME_PATTERN)
                 ),
                 new Theme(
-                        reservationView.getThemeId(), reservationView.getThemeName()
+                        reservationView.getThemeId().id(), reservationView.getThemeName().name()
                 )
         );
     }

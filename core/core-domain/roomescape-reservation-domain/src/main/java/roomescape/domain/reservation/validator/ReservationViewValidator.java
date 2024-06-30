@@ -35,16 +35,6 @@ public final class ReservationViewValidator {
                 themeId,
                 themeName
         );
-        validateNotEmpty(reservationName, themeName);
-    }
-
-    private static void validateNotEmpty(ReservationName reservationName, ThemeName themeName) {
-        if (reservationName.isEmpty()) {
-            throw DomainValidateException.notToBeEmpty(reservationName.getClass());
-        }
-        if (themeName.isEmpty()) {
-            throw DomainValidateException.notToBeEmpty(themeName.getClass());
-        }
     }
 
     private static void validateNotNull(

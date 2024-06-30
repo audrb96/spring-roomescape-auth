@@ -52,31 +52,31 @@ public class ReservationView {
         this.themeName = themeName;
     }
 
-    public Long getReservationId() {
-        return this.reservationId.id();
+    public ReservationId getReservationId() {
+        return reservationId;
     }
 
-    public String getReservationName() {
-        return this.reservationName.name();
+    public ReservationName getReservationName() {
+        return reservationName;
     }
 
-    public String getFormattedReservationDate(String pattern) {
+    public String getFormatReservationDate(String pattern) {
         return this.reservationDate.getFormat(pattern);
     }
 
-    public String getFormattedReservationTimeStartAt(String pattern) {
+    public String getFormatReservationTimeStartAt(String pattern) {
         return this.reservationTimeStartAt.getFormat(pattern);
     }
 
-    public Long getReservationTimeId() {
-        return this.reservationTimeId.id();
+    public ReservationTimeId getReservationTimeId() {
+        return reservationTimeId;
     }
 
-    public Long getThemeId() {
-        return themeId.id();
+    public ThemeId getThemeId() {
+        return themeId;
     }
 
-    public String getThemeName() {
-        return themeName.name();
+    public ThemeName getThemeName() {
+        return themeName;
     }
 }

@@ -7,7 +7,6 @@ import roomescape.domain.reservation.vo.ReservationId;
 import roomescape.domain.reservation.vo.ReservationName;
 import roomescape.domain.reservationtime.ReservationTime;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
-import roomescape.domain.theme.Theme;
 import roomescape.domain.theme.vo.ThemeId;
 
 public class Reservation {
@@ -38,16 +37,13 @@ public class Reservation {
             ReservationId id,
             ReservationName name,
             ReservationTime time,
-            Theme theme,
+            ThemeId themeId,
             CreateReservationTime createTime
     ) {
-        CreateReservationValidator.validate(id, name, time, theme, createTime);
-        return new Reservation(
-                id,
-                name,
-                time.getId(),
-                theme.getId()
-        );
+        CreateReservationValidator validator = new CreateReservationValidator(time, createTime);
+        validator.validate();
+
+        return new Reservation(id, name, time.getId(), themeId);
     }
 
     public static Reservation of(
