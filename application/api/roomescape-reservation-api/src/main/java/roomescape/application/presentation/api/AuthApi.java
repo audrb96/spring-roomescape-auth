@@ -1,22 +1,31 @@
 package roomescape.application.presentation.api;
 
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import roomescape.application.presentation.api.dto.request.LoginRequest;
+import roomescape.application.presentation.api.dto.response.LoginCheckResponse;
 import roomescape.application.service.AuthService;
+import roomescape.application.service.query.LoginCheckQuery;
+import roomescape.domain.auth.LoginCheck;
 import roomescape.jwt.JwtToken;
+import roomescape.jwt.extractor.CookieTokenExtractor;
 
 @RestController
 public class AuthApi {
 
-    private final AuthService authService;
 
-    public AuthApi(AuthService authService) {
+    private final AuthService authService;
+    private final CookieTokenExtractor tokenExtractor;
+
+    public AuthApi(AuthService authService, CookieTokenExtractor tokenExtractor) {
         this.authService = authService;
+        this.tokenExtractor = tokenExtractor;
     }
 
     @PostMapping("/login")
@@ -29,5 +38,12 @@ public class AuthApi {
         response.addCookie(cookie);
 
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/login/check")
+    public ResponseEntity<LoginCheckResponse> loginCheck(HttpServletRequest request) {
+        LoginCheck loginCheck = authService.loginCheck(new LoginCheckQuery(tokenExtractor.extract(request)));
+
+        return ResponseEntity.ok(LoginCheckResponse.from(loginCheck));
     }
 }

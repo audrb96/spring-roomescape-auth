@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import roomescape.domain.user.User;
 import roomescape.domain.user.UserRepository;
 import roomescape.domain.user.vo.UserEmail;
+import roomescape.domain.user.vo.UserId;
 import roomescape.repository.UserJdbcRepository;
 import roomescape.repository.entity.UserEntity;
 
@@ -21,6 +22,12 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public Optional<User> findByEmail(UserEmail email) {
         return repository.findByEmail(email.email())
+                .map(UserEntity::toDomain);
+    }
+
+    @Override
+    public Optional<User> findById(UserId id) {
+        return repository.findById(id.id())
                 .map(UserEntity::toDomain);
     }
 }

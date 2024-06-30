@@ -7,4 +7,6 @@ import java.util.Optional;
 public interface UserJdbcRepository {
 
     Optional<UserEntity> findByEmail(String email);
+
+    Optional<UserEntity> findById(Long id);
 }

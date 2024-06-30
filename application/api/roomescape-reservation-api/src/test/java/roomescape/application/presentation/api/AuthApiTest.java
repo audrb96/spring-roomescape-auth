@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import roomescape.application.presentation.api.dto.request.LoginRequest;
 import roomescape.application.service.AuthService;
 import roomescape.jwt.JwtToken;
+import roomescape.jwt.extractor.CookieTokenExtractor;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -26,6 +27,10 @@ class AuthApiTest {
 
     @MockBean
     private AuthService authService;
+
+    @MockBean
+    private CookieTokenExtractor tokenExtractor;
+
 
     @Autowired
     private MockMvc mockMvc;

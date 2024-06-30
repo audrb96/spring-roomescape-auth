@@ -27,4 +27,8 @@ public class User {
     public UserId getId() {
         return id;
     }
+
+    public UserName getName() {
+        return name;
+    }
 }
