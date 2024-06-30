@@ -1,4 +1,4 @@
-package roomescape.presentation.api;
+package roomescape.application.presentation.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,7 +9,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
-import roomescape.application.presentation.api.ReservationQueryApi;
+import roomescape.application.presentation.api.config.MockMvcCharacterEncodingConfig;
 import roomescape.application.presentation.api.dto.response.FindAllReservationsResponse;
 import roomescape.application.service.ReservationQueryService;
 import roomescape.domain.reservation.ReservationView;
@@ -21,7 +21,6 @@ import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.reservationtime.vo.ReservationTimeStartAt;
 import roomescape.domain.theme.vo.ThemeId;
 import roomescape.domain.theme.vo.ThemeName;
-import roomescape.presentation.api.config.MockMvcCharacterEncodingConfig;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

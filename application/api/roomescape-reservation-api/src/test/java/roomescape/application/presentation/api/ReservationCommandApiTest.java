@@ -1,4 +1,4 @@
-package roomescape.presentation.api;
+package roomescape.application.presentation.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -10,7 +10,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import roomescape.application.presentation.api.ReservationCommandApi;
 import roomescape.application.presentation.api.dto.request.CreateReservationRequest;
 import roomescape.application.presentation.api.dto.response.CreateReservationResponse;
 import roomescape.application.service.ReservationCommandService;
@@ -55,21 +54,21 @@ class ReservationCommandApiTest {
     @DisplayName("예약 생성 API 컨트롤러 테스트")
     void createReservationTest() throws Exception {
         String reservationName = "kilian";
-        CreateReservationRequest createReservationRequest =
+        CreateReservationRequest request =
                 new CreateReservationRequest(reservationName, 1L, 1L);
 
         given(reservationCommandService.create(any()))
                 .willReturn(reservation);
 
-        CreateReservationResponse expectedResponse = CreateReservationResponse.from(reservation);
+        CreateReservationResponse response = CreateReservationResponse.from(reservation);
 
         mockMvc.perform(
                         post("/reservations")
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(createReservationRequest))
+                                .content(objectMapper.writeValueAsString(request))
                 )
                 .andExpect(status().isCreated())
-                .andExpect(content().string(objectMapper.writeValueAsString(expectedResponse)));
+                .andExpect(content().string(objectMapper.writeValueAsString(response)));
     }
 
     @Test

@@ -1,4 +1,4 @@
-package roomescape.service.component.validator;
+package roomescape.application.service.component.validator;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -8,7 +8,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import roomescape.application.error.exception.CreateReservationTimeValidateException;
-import roomescape.application.service.component.validator.CreateReservationTimeValidator;
 import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservationtime.ReservationTime;
 import roomescape.domain.reservationtime.ReservationTimeRepository;

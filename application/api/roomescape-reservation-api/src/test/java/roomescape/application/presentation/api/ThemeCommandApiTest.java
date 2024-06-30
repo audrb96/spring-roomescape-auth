@@ -1,4 +1,4 @@
-package roomescape.presentation.api;
+package roomescape.application.presentation.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,7 +10,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import roomescape.application.presentation.api.ThemeCommandApi;
+import roomescape.application.presentation.api.config.MockMvcCharacterEncodingConfig;
 import roomescape.application.presentation.api.dto.request.CreateThemeRequest;
 import roomescape.application.presentation.api.dto.response.CreateThemeResponse;
 import roomescape.application.service.ThemeService;
@@ -19,7 +19,6 @@ import roomescape.domain.theme.vo.ThemeDescription;
 import roomescape.domain.theme.vo.ThemeId;
 import roomescape.domain.theme.vo.ThemeName;
 import roomescape.domain.theme.vo.ThemeThumbnail;
-import roomescape.presentation.api.config.MockMvcCharacterEncodingConfig;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;

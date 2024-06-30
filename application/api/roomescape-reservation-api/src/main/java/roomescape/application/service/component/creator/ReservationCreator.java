@@ -40,7 +40,7 @@ public class ReservationCreator {
                 ReservationId.empty(),
                 reservationName,
                 reservationTime,
-                theme,
+                theme.getId(),
                 new CreateReservationTime(clockHolder.getCurrentTime())
         );
 

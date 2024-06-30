@@ -1,4 +1,4 @@
-package roomescape.presentation.api;
+package roomescape.application.presentation.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import roomescape.application.presentation.api.ReservationTimeQueryApi;
 import roomescape.application.presentation.api.dto.response.FindAllReservationTimesResponse;
 import roomescape.application.presentation.api.dto.response.FindAvailableTimesResponse;
 import roomescape.application.service.ReservationTimeService;

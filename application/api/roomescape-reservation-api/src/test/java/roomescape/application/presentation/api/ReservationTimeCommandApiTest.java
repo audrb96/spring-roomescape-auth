@@ -1,4 +1,4 @@
-package roomescape.presentation.api;
+package roomescape.application.presentation.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -10,7 +10,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import roomescape.application.presentation.api.ReservationTimeCommandApi;
 import roomescape.application.presentation.api.dto.request.CreateReservationTimeRequest;
 import roomescape.application.presentation.api.dto.response.CreateReservationTimeResponse;
 import roomescape.application.service.ReservationTimeService;
