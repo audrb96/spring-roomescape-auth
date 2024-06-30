@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS reservation;
 DROP TABLE IF EXISTS reservation_time;
 DROP TABLE IF EXISTS theme;
--- DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE reservation
 (
@@ -39,15 +39,15 @@ CREATE TABLE theme
     PRIMARY KEY (id)
 );
 
--- CREATE TABLE user
--- (
---     id          BIGINT          NOT NULL AUTO_INCREMENT,
---     name       VARCHAR(255)    NOT NULL,
---     email       VARCHAR(255)    NOT NULL,
---     password    VARCHAR(255)    NOT NULL,
---
---     PRIMARY KEY (id)
--- )
---
--- CREATE INDEX email_idx_1 ON user (email);
+CREATE TABLE users
+(
+    id          BIGINT          NOT NULL AUTO_INCREMENT,
+    name       VARCHAR(255)    NOT NULL,
+    email       VARCHAR(255)    NOT NULL UNIQUE,
+    password    VARCHAR(255)    NOT NULL,
+
+    PRIMARY KEY (id)
+);
+
+CREATE INDEX email_idx_1 ON users (email);
 

@@ -3,7 +3,7 @@ spring:
     init:
       mode: embedded
       schema-locations: classpath:db/schema/schema.sql
-
+      data-locations: classpath:db/data/init.sql
   h2:
     console:
       enabled: true

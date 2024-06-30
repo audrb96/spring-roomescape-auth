@@ -25,7 +25,7 @@ public class MySQLJdbcUserRepository implements UserJdbcRepository {
 
     @Override
     public Optional<UserEntity> findByEmail(String email) {
-        String sql = "SELECT id, name, email, password FROM user WHERE email = :email";
+        String sql = "SELECT id, name, email, password FROM users WHERE email = :email";
 
         MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource()
                 .addValue(TABLE_COLUMN_EMAIL, email);

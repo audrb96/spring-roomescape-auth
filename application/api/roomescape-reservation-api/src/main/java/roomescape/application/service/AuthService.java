@@ -23,7 +23,7 @@ public class AuthService {
 
     public JwtToken login(LoginCommand command) {
         User user = userReader.readByEmail(command.toUserEmail());
-        
+
         return tokenProvider.createToken(user.getId());
     }
 }
