@@ -11,11 +11,17 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import roomescape.application.presentation.api.dto.request.LoginRequest;
 import roomescape.application.service.AuthService;
+import roomescape.domain.user.User;
+import roomescape.domain.user.vo.UserEmail;
+import roomescape.domain.user.vo.UserId;
+import roomescape.domain.user.vo.UserName;
+import roomescape.domain.user.vo.UserPassword;
 import roomescape.jwt.JwtToken;
 import roomescape.jwt.extractor.CookieTokenExtractor;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.cookie;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -36,10 +42,18 @@ class AuthApiTest {
     private MockMvc mockMvc;
 
     private JwtToken token;
+    private User user;
+
 
     @BeforeEach
     void setUp() {
         token = new JwtToken("token1234");
+        user = new User(
+                new UserId(1L),
+                new UserName("kilian"),
+                new UserEmail("kilian@gmail.com"),
+                new UserPassword("1234")
+        );
     }
 
     @Test
@@ -57,6 +71,17 @@ class AuthApiTest {
                 .andExpect(status().isOk())
                 .andExpect(cookie().exists("token"))
                 .andExpect(cookie().value("token", "token1234"));
+    }
+
+    @Test
+    @DisplayName("로그인 체크 API 컨트롤러 테스트")
+    void loginCheckTest() throws Exception {
+        given(authService.loginCheck(any())).willReturn(user);
+
+        mockMvc.perform(
+                        get("/login/check")
+                )
+                .andExpect(status().isOk());
     }
 
 }

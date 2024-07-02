@@ -18,8 +18,7 @@ import roomescape.jwt.extractor.CookieTokenExtractor;
 
 @RestController
 public class AuthApi {
-
-
+    
     private final AuthService authService;
     private final CookieTokenExtractor tokenExtractor;
 
