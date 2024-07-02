@@ -11,7 +11,7 @@ dependencies {
     implementation project(':core:core-db:roomescape-mysql-jdbc-db')
     implementation project(':core:core-auth:jwt')
     implementation project(':core:core-auth:roomescape-reservation-auth')
-    implementation project(':core:core-yaml-importer')
+    implementation project(':support:yml-importer')
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'

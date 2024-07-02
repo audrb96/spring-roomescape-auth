@@ -9,6 +9,7 @@ include 'application:api:roomescape-reservation-api'
 include 'core:core-domain:roomescape-reservation-domain'
 include 'core:core-db:roomescape-mysql-jdbc-db'
 include 'core:core-auth:jwt'
-include 'core:core-yaml-importer'
 include 'core:core-auth:roomescape-reservation-auth'
+include 'support'
+include 'support:yml-importer'
 
