@@ -6,5 +6,3 @@ TRUNCATE TABLE theme;
 TRUNCATE TABLE users;
 
 SET FOREIGN_KEY_CHECKS = 1;
-
-INSERT INTO users(name, email, password) values('kilian', 'kilian@gmail.com', '1234');

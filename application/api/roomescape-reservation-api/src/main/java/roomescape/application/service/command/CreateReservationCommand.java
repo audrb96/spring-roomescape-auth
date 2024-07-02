@@ -22,15 +22,15 @@ public class CreateReservationCommand {
         this.themeId = themeId;
     }
 
-    public ReservationName getReservationName() {
+    public ReservationName fetchReservationName() {
         return new ReservationName(this.reservationName);
     }
 
-    public ReservationTimeId getReservationTimeId() {
+    public ReservationTimeId fetchReservationTimeId() {
         return new ReservationTimeId(this.reservationTimeId);
     }
 
-    public ThemeId getThemeId() {
+    public ThemeId fetchThemeId() {
         return new ThemeId(this.themeId);
     }
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import roomescape.application.error.exception.ApplicationException;
+import roomescape.auth.error.exception.AuthException;
 import roomescape.error.exception.DomainException;
 
 import java.util.Collections;
@@ -33,16 +34,24 @@ public class ErrorResponse {
         this.validationErrors = validationErrors;
     }
 
-    public static ErrorResponse from(BindException ex) {
-        return new ErrorResponse(INVALID_API_REQUEST_PARAMETER.name(), ex.getMessage(), ApiValidationError.toApiValidationErrors(ex));
+    public static ErrorResponse from(BindException exception) {
+        return new ErrorResponse(
+                INVALID_API_REQUEST_PARAMETER.name(),
+                exception.getMessage(),
+                ApiValidationError.toApiValidationErrors(exception)
+        );
     }
 
-    public static ErrorResponse from(ApplicationException ex) {
-        return new ErrorResponse(ex.getCodeName(), ex.getMessage());
+    public static ErrorResponse from(ApplicationException exception) {
+        return new ErrorResponse(exception.getCodeName(), exception.getMessage());
     }
 
-    public static ErrorResponse from(DomainException ex) {
-        return new ErrorResponse(ex.getCodeName(), ex.getMessage());
+    public static ErrorResponse from(DomainException exception) {
+        return new ErrorResponse(exception.getCodeName(), exception.getMessage());
+    }
+
+    public static ErrorResponse from(AuthException exception) {
+        return new ErrorResponse(exception.getCodeName(), exception.getMessage());
     }
 
     public String getCode() {

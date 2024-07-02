@@ -16,4 +16,8 @@ public class UserPasswordEncoder {
     public UserPassword encode(UserPassword password) {
         return new UserPassword(passwordEncoder.encode(password.password()));
     }
+
+    public boolean matches(UserPassword rawPassword, UserPassword encodedPassword) {
+        return passwordEncoder.matches(rawPassword.password(), encodedPassword.password());
+    }
 }

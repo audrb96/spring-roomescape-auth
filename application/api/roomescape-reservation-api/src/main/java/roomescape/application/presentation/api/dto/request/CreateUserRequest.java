@@ -1,13 +1,18 @@
 package roomescape.application.presentation.api.dto.request;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import roomescape.application.service.command.CreateUserCommand;
 
 public class CreateUserRequest {
 
+    @Email
     private final String email;
 
+    @NotBlank
     private final String password;
 
+    @NotBlank
     private final String name;
 
     public CreateUserRequest(String email, String password, String name) {

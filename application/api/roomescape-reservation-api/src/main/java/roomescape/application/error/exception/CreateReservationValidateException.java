@@ -9,9 +9,7 @@ import static roomescape.application.error.code.ApplicationErrorCode.CANNOT_CREA
 
 public class CreateReservationValidateException extends ApplicationException {
 
-    private static final String ERROR_KEY_NAME_DATE = "date";
     private static final String ERROR_KEY_TIME_ID = "timeId";
-    private static final String DATE_FORMAT = "yyyy-MM-dd";
 
     public CreateReservationValidateException(ApplicationErrorCode code, ApplicationErrorKeys keys) {
         super(code, keys);

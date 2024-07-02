@@ -16,11 +16,11 @@ public class FindAvailableTimesQuery {
         this.themeId = themeId;
     }
 
-    public ReservationDate toReservationDate() {
+    public ReservationDate fetchReservationDate() {
         return new ReservationDate(date);
     }
 
-    public ThemeId toThemeId() {
+    public ThemeId fetchThemeId() {
         return new ThemeId(themeId);
     }
 }

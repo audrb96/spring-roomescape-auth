@@ -1,6 +1,7 @@
 package roomescape.application.service.command;
 
 import roomescape.domain.user.vo.UserEmail;
+import roomescape.domain.user.vo.UserPassword;
 
 public class LoginCommand {
 
@@ -13,7 +14,11 @@ public class LoginCommand {
         this.password = password;
     }
 
-    public UserEmail toUserEmail() {
+    public UserEmail fetchEmail() {
         return new UserEmail(this.email);
+    }
+
+    public UserPassword fetchPassword() {
+        return new UserPassword(this.password);
     }
 }

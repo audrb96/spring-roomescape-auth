@@ -33,10 +33,10 @@ public class ReservationCommandService {
     }
 
     public Reservation create(CreateReservationCommand command) {
-        ReservationTime reservationTime = reservationTimeReader.readById(command.getReservationTimeId());
-        Theme theme = themeReader.readById(command.getThemeId());
+        ReservationTime reservationTime = reservationTimeReader.readById(command.fetchReservationTimeId());
+        Theme theme = themeReader.readById(command.fetchThemeId());
 
-        return reservationCreator.create(command.getReservationName(), reservationTime, theme);
+        return reservationCreator.create(command.fetchReservationName(), reservationTime, theme);
     }
 
     public void delete(DeleteReservationCommand command) {
