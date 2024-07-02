@@ -12,7 +12,7 @@ import roomescape.application.presentation.api.dto.request.LoginRequest;
 import roomescape.application.presentation.api.dto.response.LoginCheckResponse;
 import roomescape.application.service.AuthService;
 import roomescape.application.service.query.LoginCheckQuery;
-import roomescape.domain.auth.LoginCheck;
+import roomescape.domain.user.User;
 import roomescape.jwt.JwtToken;
 import roomescape.jwt.extractor.CookieTokenExtractor;
 
@@ -42,8 +42,8 @@ public class AuthApi {
 
     @GetMapping("/login/check")
     public ResponseEntity<LoginCheckResponse> loginCheck(HttpServletRequest request) {
-        LoginCheck loginCheck = authService.loginCheck(new LoginCheckQuery(tokenExtractor.extract(request)));
+        User user = authService.loginCheck(new LoginCheckQuery(tokenExtractor.extract(request)));
 
-        return ResponseEntity.ok(LoginCheckResponse.from(loginCheck));
+        return ResponseEntity.ok(LoginCheckResponse.from(user));
     }
 }

@@ -31,4 +31,16 @@ public class User {
     public UserName getName() {
         return name;
     }
+
+    public UserEmail getEmail() {
+        return email;
+    }
+
+    public UserPassword getPassword() {
+        return password;
+    }
+
+    public User withPassword(UserPassword password) {
+        return new User(this.id, this.name, this.email, password);
+    }
 }

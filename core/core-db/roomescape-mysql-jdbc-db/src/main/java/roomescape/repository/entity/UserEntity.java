@@ -20,6 +20,10 @@ public class UserEntity {
         this.password = password;
     }
 
+    public static UserEntity from(User user) {
+        return new UserEntity(user.getId().id(), user.getName().name(), user.getEmail().email(), user.getPassword().password());
+    }
+
     public User toDomain() {
         return new User(
                 new UserId(this.id),
@@ -27,5 +31,25 @@ public class UserEntity {
                 new UserEmail(this.email),
                 new UserPassword(this.password)
         );
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public UserEntity withId(Long id) {
+        return new UserEntity(id, this.name, this.email, this.password);
     }
 }

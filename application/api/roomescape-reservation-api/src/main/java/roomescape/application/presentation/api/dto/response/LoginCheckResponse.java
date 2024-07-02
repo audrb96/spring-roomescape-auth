@@ -1,7 +1,7 @@
 package roomescape.application.presentation.api.dto.response;
 
 
-import roomescape.domain.auth.LoginCheck;
+import roomescape.domain.user.User;
 
 public class LoginCheckResponse {
 
@@ -11,8 +11,8 @@ public class LoginCheckResponse {
         this.name = name;
     }
 
-    public static LoginCheckResponse from(LoginCheck loginCheck) {
-        return new LoginCheckResponse(loginCheck.getUserName().name());
+    public static LoginCheckResponse from(User user) {
+        return new LoginCheckResponse(user.getName().name());
     }
 
     public String getName() {

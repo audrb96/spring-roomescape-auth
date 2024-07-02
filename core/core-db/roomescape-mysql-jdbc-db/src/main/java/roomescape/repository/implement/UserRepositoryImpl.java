@@ -30,4 +30,9 @@ public class UserRepositoryImpl implements UserRepository {
         return repository.findById(id.id())
                 .map(UserEntity::toDomain);
     }
+
+    @Override
+    public User save(User user) {
+        return repository.save(UserEntity.from(user)).toDomain();
+    }
 }

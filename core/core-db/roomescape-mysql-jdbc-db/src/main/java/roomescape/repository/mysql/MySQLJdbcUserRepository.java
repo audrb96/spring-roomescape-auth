@@ -3,10 +3,12 @@ package roomescape.repository.mysql;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Component;
 import roomescape.repository.UserJdbcRepository;
 import roomescape.repository.entity.UserEntity;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Component
@@ -21,6 +23,28 @@ public class MySQLJdbcUserRepository implements UserJdbcRepository {
 
     public MySQLJdbcUserRepository(NamedParameterJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public UserEntity save(UserEntity entity) {
+        String sql = "INSERT INTO users (id, name, email, password) VALUES (:id, :name, :email, :password) " +
+                "ON DUPLICATE KEY UPDATE name = VALUES(name), email = VALUES(email), password = VALUES(password)";
+
+        GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
+        MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource()
+                .addValue(TABLE_COLUMN_ID, entity.getId())
+                .addValue(TABLE_COLUMN_NAME, entity.getName())
+                .addValue(TABLE_COLUMN_EMAIL, entity.getEmail())
+                .addValue(TABLE_COLUMN_PASSWORD, entity.getPassword());
+
+        jdbcTemplate.update(sql, sqlParameterSource, generatedKeyHolder);
+
+        if (Objects.isNull(generatedKeyHolder.getKey())) {
+            return entity;
+        }
+
+        return entity.withId(generatedKeyHolder.getKey().longValue());
+
     }
 
     @Override
