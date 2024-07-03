@@ -36,7 +36,6 @@ class MySQLJdbcReservationTimeRepositoryTest {
                 mySQLJdbcReservationTimeRepository.save(
                         new ReservationTimeEntity(
                                 1L,
-                                1L,
                                 LocalDate.of(2024, 6, 28),
                                 LocalTime.of(19, 44)
                         )
@@ -47,7 +46,6 @@ class MySQLJdbcReservationTimeRepositoryTest {
             @DisplayName("업데이트 한다.")
             void updateEntity() {
                 ReservationTimeEntity expected = new ReservationTimeEntity(
-                        1L,
                         1L,
                         LocalDate.of(2024, 6, 28),
                         LocalTime.of(19, 45)
@@ -70,7 +68,6 @@ class MySQLJdbcReservationTimeRepositoryTest {
             void saveEntity() {
                 ReservationTimeEntity expected = new ReservationTimeEntity(
                         null,
-                        1L,
                         LocalDate.of(2024, 6, 28),
                         LocalTime.of(20, 3)
                 );
@@ -103,11 +100,10 @@ class MySQLJdbcReservationTimeRepositoryTest {
                 mySQLJdbcReservationTimeRepository.save(
                         new ReservationTimeEntity(
                                 1L,
-                                1L,
                                 LocalDate.of(2024, 6, 28),
                                 LocalTime.of(20, 10)
                         ));
-                
+
                 List<ReservationTimeEntity> savedEntities = mySQLJdbcReservationTimeRepository.findAll();
 
                 mySQLJdbcReservationTimeRepository.delete(1L);

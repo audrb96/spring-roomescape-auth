@@ -5,7 +5,6 @@ import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservationtime.validator.ReservationTimeValidator;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.reservationtime.vo.ReservationTimeStartAt;
-import roomescape.domain.theme.vo.ThemeId;
 
 import java.time.LocalDateTime;
 
@@ -13,20 +12,16 @@ public class ReservationTime {
 
     private final ReservationTimeId id;
 
-    private final ThemeId themeId;
-
     private final ReservationDate date;
 
     private final ReservationTimeStartAt startAt;
 
     public ReservationTime(
             ReservationTimeId id,
-            ThemeId themeId,
             ReservationDate date,
             ReservationTimeStartAt startAt
     ) {
-        ReservationTimeValidator.validate(id, themeId, date, startAt);
-        this.themeId = themeId;
+        ReservationTimeValidator.validate(id, date, startAt);
         this.id = id;
         this.date = date;
         this.startAt = startAt;
@@ -42,10 +37,6 @@ public class ReservationTime {
 
     public ReservationTimeId getId() {
         return id;
-    }
-
-    public ThemeId getThemeId() {
-        return themeId;
     }
 
     public ReservationDate getDate() {

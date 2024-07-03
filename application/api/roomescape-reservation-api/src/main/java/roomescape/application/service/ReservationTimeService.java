@@ -40,6 +40,8 @@ public class ReservationTimeService {
     }
 
     public ReservationTimes findAvailable(FindAvailableTimesQuery query) {
+
+
         return reservationTimeRepository.findByDateAndThemeId(query.fetchReservationDate(), query.fetchThemeId());
     }
 }

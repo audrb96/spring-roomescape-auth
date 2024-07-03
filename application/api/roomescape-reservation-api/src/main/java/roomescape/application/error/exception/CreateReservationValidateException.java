@@ -21,7 +21,7 @@ public class CreateReservationValidateException extends ApplicationException {
         return new CreateReservationValidateException(
                 CANNOT_CREATE_EXIST_RESERVATION_AT_THIS_TIME,
                 ApplicationErrorKeys.of(
-                        new ApplicationErrorKey(ERROR_KEY_TIME_ID, reservationTime.getId().toString())
+                        new ApplicationErrorKey(ERROR_KEY_TIME_ID, reservationTime.getId().id().toString())
                 )
         );
     }

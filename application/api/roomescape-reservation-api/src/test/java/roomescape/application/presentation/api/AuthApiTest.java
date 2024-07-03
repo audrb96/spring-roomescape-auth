@@ -37,7 +37,6 @@ class AuthApiTest {
     @MockBean
     private CookieTokenExtractor tokenExtractor;
 
-
     @Autowired
     private MockMvc mockMvc;
 

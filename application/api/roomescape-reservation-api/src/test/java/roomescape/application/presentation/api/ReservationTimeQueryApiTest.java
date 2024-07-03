@@ -16,7 +16,6 @@ import roomescape.domain.reservationtime.ReservationTime;
 import roomescape.domain.reservationtime.ReservationTimes;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.reservationtime.vo.ReservationTimeStartAt;
-import roomescape.domain.theme.vo.ThemeId;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -45,7 +44,6 @@ class ReservationTimeQueryApiTest {
     void setUp() {
         ReservationTime reservationTime = new ReservationTime(
                 new ReservationTimeId(1L),
-                new ThemeId(1L),
                 new ReservationDate(LocalDate.of(2024, 6, 28)),
                 new ReservationTimeStartAt(LocalTime.of(16, 1))
         );
