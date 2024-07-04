@@ -3,9 +3,9 @@ package roomescape.repository.config;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import roomescape.repository.mysql.MySQLJdbcReservationRepository;
-import roomescape.repository.mysql.MySQLJdbcReservationTimeRepository;
-import roomescape.repository.mysql.MySQLJdbcThemeRepository;
+import roomescape.repository.domain.reservation.mysql.MySQLJdbcReservationRepository;
+import roomescape.repository.domain.reservationtime.mysql.MySQLJdbcReservationTimeRepository;
+import roomescape.repository.domain.theme.mysql.MySQLJdbcThemeRepository;
 
 @TestConfiguration
 public class MySQLJdbcRepositoryConfig {

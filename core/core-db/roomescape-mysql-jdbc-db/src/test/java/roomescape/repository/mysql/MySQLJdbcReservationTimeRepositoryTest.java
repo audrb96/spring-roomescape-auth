@@ -8,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
-import roomescape.repository.entity.ReservationTimeEntity;
+import roomescape.repository.domain.reservationtime.entity.ReservationTimeEntity;
+import roomescape.repository.domain.reservationtime.mysql.MySQLJdbcReservationTimeRepository;
 
 import java.time.LocalTime;
 import java.util.List;
