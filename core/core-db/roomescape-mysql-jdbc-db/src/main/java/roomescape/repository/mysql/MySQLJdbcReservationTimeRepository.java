@@ -18,6 +18,7 @@ import java.util.Optional;
 public class MySQLJdbcReservationTimeRepository implements ReservationTimeJdbcRepository {
 
     private static final String TABLE_COLUMN_ID = "id";
+    private static final String TABLE_COLUMN_IDS = "ids";
     private static final String TABLE_COLUMN_START_AT = "start_at";
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -118,5 +119,26 @@ public class MySQLJdbcReservationTimeRepository implements ReservationTimeJdbcRe
                 .addValue(TABLE_COLUMN_ID, id);
 
         namedParameterJdbcTemplate.update(sql, sqlParameterSource);
+    }
+
+    @Override
+    public List<ReservationTimeEntity> findExcludeById(List<Long> ids) {
+        String sql = "SELECT id, start_at FROM reservation_time WHERE id NOT IN (:ids)";
+
+        MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource()
+                .addValue(TABLE_COLUMN_IDS, ids);
+
+        return namedParameterJdbcTemplate.query(sql, sqlParameterSource, resultSet -> {
+            List<ReservationTimeEntity> reservationTimeEntities = new ArrayList<>();
+            while (resultSet.next()) {
+                reservationTimeEntities.add(
+                        new ReservationTimeEntity(
+                                resultSet.getLong(TABLE_COLUMN_ID),
+                                resultSet.getTime(TABLE_COLUMN_START_AT).toLocalTime()
+                        )
+                );
+            }
+            return reservationTimeEntities;
+        });
     }
 }

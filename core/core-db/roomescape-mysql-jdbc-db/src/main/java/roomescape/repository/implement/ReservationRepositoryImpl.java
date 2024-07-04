@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import roomescape.domain.reservation.Reservation;
 import roomescape.domain.reservation.ReservationRepository;
 import roomescape.domain.reservation.ReservationViews;
+import roomescape.domain.reservation.Reservations;
 import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservation.vo.ReservationId;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
@@ -12,7 +13,6 @@ import roomescape.repository.ReservationJdbcRepository;
 import roomescape.repository.entity.ReservationEntity;
 import roomescape.repository.projection.ReservationViewProjection;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -43,9 +43,13 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     }
 
     @Override
-    public List<Reservation> findByDateAndThemeId(ReservationDate date, ThemeId themeId) {
-
-        return null;
+    public Reservations findByDateAndThemeId(ReservationDate date, ThemeId themeId) {
+        return new Reservations(
+                repository.findByDateAndThemeId(date.date(), themeId.id())
+                        .stream()
+                        .map(ReservationEntity::toDomain)
+                        .collect(Collectors.toList())
+        );
     }
 
     @Override

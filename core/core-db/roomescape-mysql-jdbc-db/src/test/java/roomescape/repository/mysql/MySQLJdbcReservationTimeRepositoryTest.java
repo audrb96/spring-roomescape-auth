@@ -5,19 +5,18 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import roomescape.repository.entity.ReservationTimeEntity;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 @SpringBootTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@TestPropertySource(properties = {"spring.config.location = classpath:application-mysql-jdbc-test.yml"})
 @Sql({"classpath:db/schema/schema.sql", "classpath:db/data/init.sql"})
 class MySQLJdbcReservationTimeRepositoryTest {
 
@@ -36,7 +35,6 @@ class MySQLJdbcReservationTimeRepositoryTest {
                 mySQLJdbcReservationTimeRepository.save(
                         new ReservationTimeEntity(
                                 1L,
-                                LocalDate.of(2024, 6, 28),
                                 LocalTime.of(19, 44)
                         )
                 );
@@ -47,7 +45,6 @@ class MySQLJdbcReservationTimeRepositoryTest {
             void updateEntity() {
                 ReservationTimeEntity expected = new ReservationTimeEntity(
                         1L,
-                        LocalDate.of(2024, 6, 28),
                         LocalTime.of(19, 45)
                 );
 
@@ -68,7 +65,6 @@ class MySQLJdbcReservationTimeRepositoryTest {
             void saveEntity() {
                 ReservationTimeEntity expected = new ReservationTimeEntity(
                         null,
-                        LocalDate.of(2024, 6, 28),
                         LocalTime.of(20, 3)
                 );
 
@@ -100,7 +96,6 @@ class MySQLJdbcReservationTimeRepositoryTest {
                 mySQLJdbcReservationTimeRepository.save(
                         new ReservationTimeEntity(
                                 1L,
-                                LocalDate.of(2024, 6, 28),
                                 LocalTime.of(20, 10)
                         ));
 

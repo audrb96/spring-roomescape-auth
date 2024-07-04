@@ -1,7 +1,10 @@
 package roomescape.domain.reservation;
 
+import roomescape.domain.reservationtime.vo.ReservationTimeId;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Reservations {
 
@@ -20,5 +23,11 @@ public class Reservations {
         reservations.add(reservation);
 
         return new Reservations(List.copyOf(reservations));
+    }
+
+    public List<ReservationTimeId> fetchTimeIds() {
+        return this.reservations.stream()
+                .map(Reservation::getTimeId)
+                .collect(Collectors.toList());
     }
 }

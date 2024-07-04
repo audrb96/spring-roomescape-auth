@@ -17,4 +17,6 @@ public interface ReservationTimeJdbcRepository {
     List<ReservationTimeEntity> findAll();
 
     void delete(Long id);
+
+    List<ReservationTimeEntity> findExcludeById(List<Long> ids);
 }

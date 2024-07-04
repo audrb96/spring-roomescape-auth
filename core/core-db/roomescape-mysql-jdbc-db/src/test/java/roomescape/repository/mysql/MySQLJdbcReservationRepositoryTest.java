@@ -5,17 +5,18 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import roomescape.repository.entity.ReservationEntity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 @SpringBootTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@TestPropertySource(properties = {"spring.config.location = classpath:application-mysql-jdbc-test.yml"})
 @Sql({"classpath:db/schema/schema.sql", "classpath:db/data/init.sql"})
 class MySQLJdbcReservationRepositoryTest {
 
@@ -36,7 +37,8 @@ class MySQLJdbcReservationRepositoryTest {
                         new ReservationEntity(
                                 1L,
                                 "kilian",
-                                date, 1L,
+                                LocalDate.of(2024, 7, 4),
+                                1L,
                                 1L
                         ));
             }
@@ -47,7 +49,8 @@ class MySQLJdbcReservationRepositoryTest {
                 ReservationEntity expected = new ReservationEntity(
                         1L,
                         "brie",
-                        date, 1L,
+                        LocalDate.of(2024, 7, 4),
+                        1L,
                         1L
                 );
 
@@ -70,7 +73,8 @@ class MySQLJdbcReservationRepositoryTest {
                 ReservationEntity expected = new ReservationEntity(
                         1L,
                         "kilian",
-                        date, 1L,
+                        LocalDate.of(2024, 7, 4),
+                        1L,
                         1L
                 );
 
@@ -104,7 +108,8 @@ class MySQLJdbcReservationRepositoryTest {
                         new ReservationEntity(
                                 1L,
                                 "kilian",
-                                date, 1L,
+                                LocalDate.of(2024, 7, 4),
+                                1L,
                                 1L
                         ));
                 List<ReservationEntity> savedEntities = mySQLJdbcReservationRepository.findAll();

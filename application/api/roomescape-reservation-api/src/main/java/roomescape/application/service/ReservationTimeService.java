@@ -7,6 +7,7 @@ import roomescape.application.service.component.creator.ReservationTimeCreator;
 import roomescape.application.service.component.remover.ReservationTimeRemover;
 import roomescape.application.service.query.FindAvailableTimesQuery;
 import roomescape.domain.reservation.ReservationRepository;
+import roomescape.domain.reservation.Reservations;
 import roomescape.domain.reservationtime.ReservationTime;
 import roomescape.domain.reservationtime.ReservationTimeRepository;
 import roomescape.domain.reservationtime.ReservationTimes;
@@ -44,7 +45,8 @@ public class ReservationTimeService {
     }
 
     public ReservationTimes findAvailable(FindAvailableTimesQuery query) {
+        Reservations reservations = reservationRepository.findByDateAndThemeId(query.fetchReservationDate(), query.fetchThemeId());
 
-        return null;
+        return reservationTimeRepository.findExcludeById(reservations.fetchTimeIds());
     }
 }

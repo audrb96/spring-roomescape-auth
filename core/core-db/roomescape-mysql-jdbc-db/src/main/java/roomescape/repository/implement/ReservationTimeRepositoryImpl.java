@@ -9,6 +9,7 @@ import roomescape.domain.reservationtime.vo.ReservationTimeStartAt;
 import roomescape.repository.ReservationTimeJdbcRepository;
 import roomescape.repository.entity.ReservationTimeEntity;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -50,5 +51,18 @@ public class ReservationTimeRepositoryImpl implements ReservationTimeRepository 
     @Override
     public void delete(ReservationTimeId id) {
         repository.delete(id.id());
+    }
+
+    @Override
+    public ReservationTimes findExcludeById(List<ReservationTimeId> ids) {
+        return
+                new ReservationTimes(
+                        repository.findExcludeById(
+                                        ids.stream().map(ReservationTimeId::id)
+                                                .collect(Collectors.toList())
+                                ).stream()
+                                .map(ReservationTimeEntity::toDomain)
+                                .collect(Collectors.toList())
+                );
     }
 }

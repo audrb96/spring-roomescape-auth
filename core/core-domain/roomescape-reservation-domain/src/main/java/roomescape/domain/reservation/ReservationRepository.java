@@ -5,7 +5,6 @@ import roomescape.domain.reservation.vo.ReservationId;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.theme.vo.ThemeId;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface ReservationRepository {
@@ -16,7 +15,7 @@ public interface ReservationRepository {
 
     Optional<Reservation> findById(ReservationId id);
 
-    List<Reservation> findByDateAndThemeId(ReservationDate date, ThemeId themeId);
+    Reservations findByDateAndThemeId(ReservationDate date, ThemeId themeId);
 
     ReservationViews findAllReservationViews();
 

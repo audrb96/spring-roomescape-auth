@@ -3,6 +3,7 @@ package roomescape.domain.reservationtime;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.reservationtime.vo.ReservationTimeStartAt;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ReservationTimeRepository {
@@ -16,4 +17,6 @@ public interface ReservationTimeRepository {
     ReservationTimes findAll();
 
     void delete(ReservationTimeId id);
+
+    ReservationTimes findExcludeById(List<ReservationTimeId> ids);
 }
