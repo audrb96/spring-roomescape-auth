@@ -4,10 +4,9 @@ import org.springframework.stereotype.Service;
 import roomescape.application.service.command.CreateReservationTimeCommand;
 import roomescape.application.service.command.DeleteReservationTimeCommand;
 import roomescape.application.service.component.creator.ReservationTimeCreator;
+import roomescape.application.service.component.reader.ReservationTimeReader;
 import roomescape.application.service.component.remover.ReservationTimeRemover;
 import roomescape.application.service.query.FindAvailableTimesQuery;
-import roomescape.domain.reservation.ReservationRepository;
-import roomescape.domain.reservation.Reservations;
 import roomescape.domain.reservationtime.ReservationTime;
 import roomescape.domain.reservationtime.ReservationTimeRepository;
 import roomescape.domain.reservationtime.ReservationTimes;
@@ -15,19 +14,17 @@ import roomescape.domain.reservationtime.ReservationTimes;
 @Service
 public class ReservationTimeService {
 
-    private final ReservationTimeRepository reservationTimeRepository;
-    private final ReservationRepository reservationRepository;
+    private final ReservationTimeReader reservationTimeReader;
     private final ReservationTimeCreator reservationTimeCreator;
     private final ReservationTimeRemover reservationTimeRemover;
 
     public ReservationTimeService(
             ReservationTimeRepository reservationTimeRepository,
-            ReservationRepository reservationRepository,
+            ReservationTimeReader reservationTimeReader,
             ReservationTimeCreator reservationTimeCreator,
             ReservationTimeRemover reservationTimeRemover
     ) {
-        this.reservationTimeRepository = reservationTimeRepository;
-        this.reservationRepository = reservationRepository;
+        this.reservationTimeReader = reservationTimeReader;
         this.reservationTimeCreator = reservationTimeCreator;
         this.reservationTimeRemover = reservationTimeRemover;
     }
@@ -37,7 +34,7 @@ public class ReservationTimeService {
     }
 
     public ReservationTimes findAll() {
-        return reservationTimeRepository.findAll();
+        return reservationTimeReader.readAll();
     }
 
     public void delete(DeleteReservationTimeCommand command) {
@@ -45,8 +42,6 @@ public class ReservationTimeService {
     }
 
     public ReservationTimes findAvailable(FindAvailableTimesQuery query) {
-        Reservations reservations = reservationRepository.findByDateAndThemeId(query.fetchReservationDate(), query.fetchThemeId());
-
-        return reservationTimeRepository.findExcludeById(reservations.fetchTimeIds());
+        return reservationTimeReader.readByDateAndThemeId(query.fetchReservationDate(), query.fetchThemeId());
     }
 }

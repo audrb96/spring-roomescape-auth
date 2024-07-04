@@ -2,27 +2,19 @@ package roomescape.application.service;
 
 import org.springframework.stereotype.Service;
 import roomescape.application.service.command.CreateUserCommand;
-import roomescape.auth.password.encoder.UserPasswordEncoder;
+import roomescape.application.service.component.creator.UserCreator;
 import roomescape.domain.user.User;
-import roomescape.domain.user.UserRepository;
-import roomescape.domain.user.vo.UserPassword;
 
 @Service
 public class UserService {
+    
+    private final UserCreator userCreator;
 
-    private final UserRepository userRepository;
-
-    private final UserPasswordEncoder passwordEncoder;
-
-    public UserService(UserRepository userRepository, UserPasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+    public UserService(UserCreator userCreator) {
+        this.userCreator = userCreator;
     }
 
     public User create(CreateUserCommand command) {
-        User user = command.toUser();
-        UserPassword encodedPassword = passwordEncoder.encode(user.getPassword());
-
-        return userRepository.save(user.withPassword(encodedPassword));
+        return userCreator.create(command.toUser());
     }
 }
