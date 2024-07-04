@@ -111,7 +111,6 @@ function renderAvailableTimes(times) {
         const timeId = time.id;
         const alreadyBooked = false;
 
-        console.log(time)
         const div = createSlot('time', startAt, timeId, alreadyBooked); // createSlot('time', 시작 시간, time id, 예약 여부)
         timeSlots.appendChild(div);
     });
@@ -138,19 +137,19 @@ function checkDateAndThemeAndTime() {
 }
 
 function onReservationButtonClick() {
+    const selectedDate = document.getElementById("datepicker").value;
     const selectedThemeId = document.querySelector('.theme-slot.active')?.getAttribute('data-theme-id');
     const selectedTimeId = document.querySelector('.time-slot.active')?.getAttribute('data-time-id');
     const name = document.getElementById('user-name').value;
 
-    if (selectedThemeId && selectedTimeId) {
+    if (selectedDate && selectedThemeId && selectedTimeId) {
         const reservationData = {
+            date: selectedDate,
             themeId: selectedThemeId,
             timeId: selectedTimeId,
             name: name
         };
-        console.log(selectedThemeId)
-        console.log(selectedTimeId)
-        console.log(name)
+
         fetch('/reservations', {
             method: 'POST',
             headers: {
