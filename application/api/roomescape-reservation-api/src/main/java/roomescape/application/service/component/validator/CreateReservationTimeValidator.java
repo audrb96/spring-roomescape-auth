@@ -18,8 +18,8 @@ public class CreateReservationTimeValidator {
     }
 
     public void validate(ReservationTime reservationTime) {
-        if (timeRepository.existEquals(reservationTime)) {
-            throw CreateReservationTimeValidateException.existEquals(reservationTime);
+        if (timeRepository.existByStartAt(reservationTime.getStartAt())) {
+            throw CreateReservationTimeValidateException.existSameStartAt(reservationTime.getStartAt());
         }
     }
 }

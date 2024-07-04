@@ -6,6 +6,7 @@ import roomescape.application.service.component.validator.CreateReservationValid
 import roomescape.domain.reservation.Reservation;
 import roomescape.domain.reservation.ReservationRepository;
 import roomescape.domain.reservation.vo.CreateReservationTime;
+import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservation.vo.ReservationId;
 import roomescape.domain.reservation.vo.ReservationName;
 import roomescape.domain.reservationtime.ReservationTime;
@@ -30,16 +31,18 @@ public class ReservationCreator {
     }
 
     public Reservation create(
-            ReservationName reservationName,
-            ReservationTime reservationTime,
+            ReservationName name,
+            ReservationDate date,
+            ReservationTime time,
             Theme theme
     ) {
-        validator.validate(reservationTime);
+        validator.validate(date, time);
 
         Reservation createdReservation = Reservation.create(
                 ReservationId.empty(),
-                reservationName,
-                reservationTime,
+                name,
+                date,
+                time,
                 theme.getId(),
                 new CreateReservationTime(clockHolder.getCurrentTime())
         );

@@ -3,7 +3,7 @@ package roomescape.application.error.exception;
 import roomescape.application.error.code.ApplicationErrorCode;
 import roomescape.application.error.key.ApplicationErrorKey;
 import roomescape.application.error.key.ApplicationErrorKeys;
-import roomescape.domain.reservationtime.ReservationTime;
+import roomescape.domain.reservationtime.vo.ReservationTimeStartAt;
 
 import static roomescape.application.error.code.ApplicationErrorCode.CANNOT_CREATE_EXIST_RESERVATION_TIME;
 
@@ -19,17 +19,13 @@ public class CreateReservationTimeValidateException extends ApplicationException
         super(code, keys);
     }
 
-    public static CreateReservationTimeValidateException existEquals(ReservationTime reservationTime) {
+    public static CreateReservationTimeValidateException existSameStartAt(ReservationTimeStartAt startAt) {
         return new CreateReservationTimeValidateException(
                 CANNOT_CREATE_EXIST_RESERVATION_TIME,
                 ApplicationErrorKeys.of(
                         new ApplicationErrorKey(
-                                ERROR_KEY_NAME_DATE,
-                                reservationTime.getFormatDate(DATE_FORMAT)
-                        ),
-                        new ApplicationErrorKey(
                                 ERROR_KEY_NAME_START_AT,
-                                reservationTime.getFormatStartAt(TIME_FORMAT)
+                                startAt.getFormat(TIME_FORMAT)
                         )
                 )
         );

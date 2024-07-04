@@ -1,12 +1,11 @@
 package roomescape.repository.implement;
 
 import org.springframework.stereotype.Repository;
-import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservationtime.ReservationTime;
 import roomescape.domain.reservationtime.ReservationTimeRepository;
 import roomescape.domain.reservationtime.ReservationTimes;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
-import roomescape.domain.theme.vo.ThemeId;
+import roomescape.domain.reservationtime.vo.ReservationTimeStartAt;
 import roomescape.repository.ReservationTimeJdbcRepository;
 import roomescape.repository.entity.ReservationTimeEntity;
 
@@ -35,8 +34,8 @@ public class ReservationTimeRepositoryImpl implements ReservationTimeRepository 
     }
 
     @Override
-    public boolean existEquals(ReservationTime reservationTime) {
-        return repository.findEquals(ReservationTimeEntity.from(reservationTime)).isPresent();
+    public boolean existByStartAt(ReservationTimeStartAt startAt) {
+        return repository.findByStartAt(startAt.startAt()).isPresent();
     }
 
     @Override
@@ -51,14 +50,5 @@ public class ReservationTimeRepositoryImpl implements ReservationTimeRepository 
     @Override
     public void delete(ReservationTimeId id) {
         repository.delete(id.id());
-    }
-
-    @Override
-    public ReservationTimes findByDateAndThemeId(ReservationDate date, ThemeId themeId) {
-        return new ReservationTimes(
-                repository.findByDateAndThemeId(date.date(), themeId.id()).stream()
-                        .map(ReservationTimeEntity::toDomain)
-                        .collect(Collectors.toList())
-        );
     }
 }

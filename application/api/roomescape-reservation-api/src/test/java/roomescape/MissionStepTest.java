@@ -74,12 +74,12 @@ public class MissionStepTest {
         CreateReservationRequest createReservationRequest =
                 new CreateReservationRequest(
                         "브라운",
+                        LocalDate.now().plusDays(1L).format(DateTimeFormatter.ofPattern(DATE_FORMAT)),
                         1L,
                         1L
                 );
         CreateReservationTimeRequest createReservationTimeRequest =
                 new CreateReservationTimeRequest(
-                        LocalDate.now().plusDays(1L).format(DateTimeFormatter.ofPattern(DATE_FORMAT)),
                         "21:11"
                 );
 

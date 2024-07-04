@@ -1,6 +1,5 @@
 package roomescape.domain.reservationtime.validator;
 
-import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.reservationtime.vo.ReservationTimeStartAt;
 import roomescape.error.exception.DomainValidateException;
@@ -15,22 +14,17 @@ public final class ReservationTimeValidator {
 
     public static void validate(
             ReservationTimeId id,
-            ReservationDate date,
             ReservationTimeStartAt startAt
     ) {
-        validateNotNull(id, date, startAt);
+        validateNotNull(id, startAt);
     }
 
     private static void validateNotNull(
             ReservationTimeId id,
-            ReservationDate date,
             ReservationTimeStartAt startAt
     ) {
         if (Objects.isNull(id)) {
             throw DomainValidateException.notToBeNull(ReservationTimeId.class);
-        }
-        if (Objects.isNull(date)) {
-            throw DomainValidateException.notToBeNull(ReservationDate.class);
         }
         if (Objects.isNull(startAt)) {
             throw DomainValidateException.notToBeNull(ReservationTimeStartAt.class);

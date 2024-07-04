@@ -30,9 +30,9 @@ class CreateReservationValidatorTest {
             @DisplayName("예외가 발생하지 않는다.")
             void NotThrownException() {
                 CreateReservationValidator validator = new CreateReservationValidator(
+                        new ReservationDate(LocalDate.of(2024, 6, 17)),
                         new ReservationTime(
                                 new ReservationTimeId(1L),
-                                new ReservationDate(LocalDate.of(2024, 6, 17)),
                                 new ReservationTimeStartAt(LocalTime.of(18, 0))
                         ),
                         new CreateReservationTime(LocalDateTime.of(2024, 6, 17, 17, 59))
@@ -51,9 +51,9 @@ class CreateReservationValidatorTest {
             void throwCreateReservationValidateException() {
 
                 CreateReservationValidator validator = new CreateReservationValidator(
+                        new ReservationDate(LocalDate.of(2024, 6, 17)),
                         new ReservationTime(
                                 new ReservationTimeId(1L),
-                                new ReservationDate(LocalDate.of(2024, 6, 17)),
                                 new ReservationTimeStartAt(LocalTime.of(18, 0))
                         ),
                         new CreateReservationTime(LocalDateTime.of(2024, 6, 17, 18, 1))

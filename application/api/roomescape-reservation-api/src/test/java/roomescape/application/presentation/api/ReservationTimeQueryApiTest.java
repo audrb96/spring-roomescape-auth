@@ -11,13 +11,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import roomescape.application.presentation.api.dto.response.FindAllReservationTimesResponse;
 import roomescape.application.presentation.api.dto.response.FindAvailableTimesResponse;
 import roomescape.application.service.ReservationTimeService;
-import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservationtime.ReservationTime;
 import roomescape.domain.reservationtime.ReservationTimes;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.reservationtime.vo.ReservationTimeStartAt;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -44,7 +42,6 @@ class ReservationTimeQueryApiTest {
     void setUp() {
         ReservationTime reservationTime = new ReservationTime(
                 new ReservationTimeId(1L),
-                new ReservationDate(LocalDate.of(2024, 6, 28)),
                 new ReservationTimeStartAt(LocalTime.of(16, 1))
         );
 

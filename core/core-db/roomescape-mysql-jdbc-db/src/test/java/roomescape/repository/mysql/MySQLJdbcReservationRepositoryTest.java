@@ -36,7 +36,7 @@ class MySQLJdbcReservationRepositoryTest {
                         new ReservationEntity(
                                 1L,
                                 "kilian",
-                                1L,
+                                date, 1L,
                                 1L
                         ));
             }
@@ -47,7 +47,7 @@ class MySQLJdbcReservationRepositoryTest {
                 ReservationEntity expected = new ReservationEntity(
                         1L,
                         "brie",
-                        1L,
+                        date, 1L,
                         1L
                 );
 
@@ -70,7 +70,7 @@ class MySQLJdbcReservationRepositoryTest {
                 ReservationEntity expected = new ReservationEntity(
                         1L,
                         "kilian",
-                        1L,
+                        date, 1L,
                         1L
                 );
 
@@ -104,7 +104,7 @@ class MySQLJdbcReservationRepositoryTest {
                         new ReservationEntity(
                                 1L,
                                 "kilian",
-                                1L,
+                                date, 1L,
                                 1L
                         ));
                 List<ReservationEntity> savedEntities = mySQLJdbcReservationRepository.findAll();

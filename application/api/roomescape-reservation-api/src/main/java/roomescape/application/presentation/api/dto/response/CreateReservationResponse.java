@@ -10,13 +10,16 @@ public class CreateReservationResponse {
 
     private final String name;
 
+    private final String date;
+
     private final Long timeId;
 
     private final Long themeId;
 
-    public CreateReservationResponse(Long id, String name, Long timeId, Long themeId) {
+    public CreateReservationResponse(Long id, String name, String date, Long timeId, Long themeId) {
         this.id = id;
         this.name = name;
+        this.date = date;
         this.timeId = timeId;
         this.themeId = themeId;
     }
@@ -25,6 +28,7 @@ public class CreateReservationResponse {
         return new CreateReservationResponse(
                 reservation.getId().id(),
                 reservation.getName().name(),
+                reservation.getFormatDate(DATE_PATTERN),
                 reservation.getTimeId().id(),
                 reservation.getThemeId().id()
         );
@@ -44,5 +48,9 @@ public class CreateReservationResponse {
 
     public Long getThemeId() {
         return themeId;
+    }
+
+    public String getDate() {
+        return date;
     }
 }

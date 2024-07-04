@@ -6,6 +6,7 @@ import roomescape.application.service.command.DeleteReservationTimeCommand;
 import roomescape.application.service.component.creator.ReservationTimeCreator;
 import roomescape.application.service.component.remover.ReservationTimeRemover;
 import roomescape.application.service.query.FindAvailableTimesQuery;
+import roomescape.domain.reservation.ReservationRepository;
 import roomescape.domain.reservationtime.ReservationTime;
 import roomescape.domain.reservationtime.ReservationTimeRepository;
 import roomescape.domain.reservationtime.ReservationTimes;
@@ -14,15 +15,18 @@ import roomescape.domain.reservationtime.ReservationTimes;
 public class ReservationTimeService {
 
     private final ReservationTimeRepository reservationTimeRepository;
+    private final ReservationRepository reservationRepository;
     private final ReservationTimeCreator reservationTimeCreator;
     private final ReservationTimeRemover reservationTimeRemover;
 
     public ReservationTimeService(
             ReservationTimeRepository reservationTimeRepository,
+            ReservationRepository reservationRepository,
             ReservationTimeCreator reservationTimeCreator,
             ReservationTimeRemover reservationTimeRemover
     ) {
         this.reservationTimeRepository = reservationTimeRepository;
+        this.reservationRepository = reservationRepository;
         this.reservationTimeCreator = reservationTimeCreator;
         this.reservationTimeRemover = reservationTimeRemover;
     }
@@ -41,7 +45,6 @@ public class ReservationTimeService {
 
     public ReservationTimes findAvailable(FindAvailableTimesQuery query) {
 
-
-        return reservationTimeRepository.findByDateAndThemeId(query.fetchReservationDate(), query.fetchThemeId());
+        return null;
     }
 }

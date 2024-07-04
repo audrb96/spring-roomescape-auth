@@ -9,6 +9,7 @@ import roomescape.repository.ReservationJdbcRepository;
 import roomescape.repository.entity.ReservationEntity;
 import roomescape.repository.projection.ReservationViewProjection;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -18,6 +19,7 @@ import java.util.Optional;
 public class MySQLJdbcReservationRepository implements ReservationJdbcRepository {
 
     private static final String TABLE_COLUMN_ID = "id";
+    private static final String TABLE_COLUMN_DATE = "date";
     private static final String TABLE_COLUMN_NAME = "name";
     private static final String TABLE_COLUMN_TIME_ID = "time_id";
     private static final String TABLE_COLUMN_THEME_ID = "theme_id";
@@ -38,13 +40,14 @@ public class MySQLJdbcReservationRepository implements ReservationJdbcRepository
 
     @Override
     public ReservationEntity save(ReservationEntity entity) {
-        String sql = "INSERT INTO reservation (id, name, time_id, theme_id) VALUES (:id, :name, :time_id, :theme_id) " +
-                "ON DUPLICATE KEY UPDATE name = VALUES(name), time_id = VALUES(time_id), theme_id = VALUES(theme_id)";
+        String sql = "INSERT INTO reservation (id, name, date, time_id, theme_id) VALUES (:id, :name, :date, :time_id, :theme_id) " +
+                "ON DUPLICATE KEY UPDATE name = VALUES(name), date = VALUES(date), time_id = VALUES(time_id), theme_id = VALUES(theme_id)";
 
         GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
         MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource()
                 .addValue(TABLE_COLUMN_ID, entity.getId())
                 .addValue(TABLE_COLUMN_NAME, entity.getReservationName())
+                .addValue(TABLE_COLUMN_DATE, entity.getDate())
                 .addValue(TABLE_COLUMN_TIME_ID, entity.getReservationTimeId())
                 .addValue(TABLE_COLUMN_THEME_ID, entity.getThemeId());
 
@@ -59,7 +62,7 @@ public class MySQLJdbcReservationRepository implements ReservationJdbcRepository
 
     @Override
     public List<ReservationEntity> findAll() {
-        String sql = "SELECT id, name, time_id, theme_id FROM reservation";
+        String sql = "SELECT id, name, date, time_id, theme_id FROM reservation";
 
         return namedParameterJdbcTemplate.query(sql, resultSet -> {
             List<ReservationEntity> reservationEntities = new ArrayList<>();
@@ -68,6 +71,7 @@ public class MySQLJdbcReservationRepository implements ReservationJdbcRepository
                         new ReservationEntity(
                                 resultSet.getLong(TABLE_COLUMN_ID),
                                 resultSet.getString(TABLE_COLUMN_NAME),
+                                resultSet.getDate(TABLE_COLUMN_DATE).toLocalDate(),
                                 resultSet.getLong(TABLE_COLUMN_TIME_ID),
                                 resultSet.getLong(TABLE_COLUMN_THEME_ID)
                         )
@@ -89,7 +93,7 @@ public class MySQLJdbcReservationRepository implements ReservationJdbcRepository
 
     @Override
     public Optional<ReservationEntity> findById(Long id) {
-        String sql = "SELECT id, name, time_id, theme_id FROM reservation WHERE id = :id";
+        String sql = "SELECT id, name, date, time_id, theme_id FROM reservation WHERE id = :id";
 
         MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource()
                 .addValue(TABLE_COLUMN_ID, id);
@@ -102,6 +106,7 @@ public class MySQLJdbcReservationRepository implements ReservationJdbcRepository
                             (resultSet, rowNum) -> new ReservationEntity(
                                     resultSet.getLong(TABLE_COLUMN_ID),
                                     resultSet.getString(TABLE_COLUMN_NAME),
+                                    resultSet.getDate(TABLE_COLUMN_DATE).toLocalDate(),
                                     resultSet.getLong(TABLE_COLUMN_TIME_ID),
                                     resultSet.getLong(TABLE_COLUMN_THEME_ID)
                             )
@@ -113,11 +118,36 @@ public class MySQLJdbcReservationRepository implements ReservationJdbcRepository
     }
 
     @Override
+    public List<ReservationEntity> findByDateAndThemeId(LocalDate date, Long themeId) {
+        String sql = "SELECT id, name, date, time_id, theme_id FROM reservation WHERE date = :date and theme_id = :theme_id";
+
+        MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource()
+                .addValue(TABLE_COLUMN_DATE, date)
+                .addValue(TABLE_COLUMN_THEME_ID, themeId);
+
+        return namedParameterJdbcTemplate.query(sql, sqlParameterSource, resultSet -> {
+            List<ReservationEntity> reservationEntities = new ArrayList<>();
+            while (resultSet.next()) {
+                reservationEntities.add(
+                        new ReservationEntity(
+                                resultSet.getLong(TABLE_COLUMN_ID),
+                                resultSet.getString(TABLE_COLUMN_NAME),
+                                resultSet.getDate(TABLE_COLUMN_DATE).toLocalDate(),
+                                resultSet.getLong(TABLE_COLUMN_TIME_ID),
+                                resultSet.getLong(TABLE_COLUMN_THEME_ID)
+                        )
+                );
+            }
+            return reservationEntities;
+        });
+    }
+
+    @Override
     public List<ReservationViewProjection> findAllReservationViewProjection() {
         String sql = "SELECT " +
                 "    r.id as reservation_id, " +
                 "    r.name as reservation_name, " +
-                "    t.date as reservation_date, " +
+                "    r.date as reservation_date, " +
                 "    t.id as time_id, " +
                 "    t.start_at as time_start_at, " +
                 "    m.id as theme_id, " +
@@ -150,8 +180,34 @@ public class MySQLJdbcReservationRepository implements ReservationJdbcRepository
     }
 
     @Override
+    public Optional<ReservationEntity> findByDateAndTimeId(LocalDate date, Long timeId) {
+        String sql = "SELECT id, name, date, time_id, theme_id FROM reservation WHERE date = :date and time_id = :time_id";
+        MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource()
+                .addValue(TABLE_COLUMN_DATE, date)
+                .addValue(TABLE_COLUMN_TIME_ID, timeId);
+
+        try {
+            return Optional.ofNullable(
+                    namedParameterJdbcTemplate.queryForObject(
+                            sql,
+                            sqlParameterSource,
+                            (resultSet, rowNum) -> new ReservationEntity(
+                                    resultSet.getLong(TABLE_COLUMN_ID),
+                                    resultSet.getString(TABLE_COLUMN_NAME),
+                                    resultSet.getDate(TABLE_COLUMN_DATE).toLocalDate(),
+                                    resultSet.getLong(TABLE_COLUMN_TIME_ID),
+                                    resultSet.getLong(TABLE_COLUMN_THEME_ID)
+                            )
+                    )
+            );
+        } catch (EmptyResultDataAccessException ex) {
+            return Optional.empty();
+        }
+    }
+
+    @Override
     public Optional<ReservationEntity> findByTimeId(Long timeId) {
-        String sql = "SELECT id, name, time_id, theme_id FROM reservation WHERE time_id = :time_id";
+        String sql = "SELECT id, name, date, time_id, theme_id FROM reservation WHERE time_id = :time_id";
         MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource()
                 .addValue(TABLE_COLUMN_TIME_ID, timeId);
 
@@ -163,6 +219,7 @@ public class MySQLJdbcReservationRepository implements ReservationJdbcRepository
                             (resultSet, rowNum) -> new ReservationEntity(
                                     resultSet.getLong(TABLE_COLUMN_ID),
                                     resultSet.getString(TABLE_COLUMN_NAME),
+                                    resultSet.getDate(TABLE_COLUMN_DATE).toLocalDate(),
                                     resultSet.getLong(TABLE_COLUMN_TIME_ID),
                                     resultSet.getLong(TABLE_COLUMN_THEME_ID)
                             )

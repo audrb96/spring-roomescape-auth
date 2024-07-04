@@ -3,6 +3,7 @@ package roomescape.repository;
 import roomescape.repository.entity.ReservationEntity;
 import roomescape.repository.projection.ReservationViewProjection;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,11 @@ public interface ReservationJdbcRepository {
 
     Optional<ReservationEntity> findById(Long id);
 
+    List<ReservationEntity> findByDateAndThemeId(LocalDate date, Long themeId);
+
     List<ReservationViewProjection> findAllReservationViewProjection();
+
+    Optional<ReservationEntity> findByDateAndTimeId(LocalDate date, Long timeId);
 
     Optional<ReservationEntity> findByTimeId(Long timeId);
 }
