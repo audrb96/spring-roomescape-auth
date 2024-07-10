@@ -1,8 +1,8 @@
 package roomescape.application.domain.reservation.service.component.creator;
 
 import org.springframework.stereotype.Component;
+import roomescape.application.common.component.clockholder.ClockHolder;
 import roomescape.application.domain.reservation.service.component.validator.CreateReservationValidator;
-import roomescape.application.util.component.clockholder.ClockHolder;
 import roomescape.domain.reservation.Reservation;
 import roomescape.domain.reservation.ReservationRepository;
 import roomescape.domain.reservation.vo.CreateReservationTime;

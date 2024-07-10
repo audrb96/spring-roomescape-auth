@@ -21,7 +21,7 @@ public class NotFoundDomainException extends DomainException {
         super(code, keys);
     }
 
-    public static NotFoundDomainException notFoundReservationTime(ReservationTimeId id) {
+    public static NotFoundDomainException reservationTime(ReservationTimeId id) {
         return new NotFoundDomainException(
                 NOT_FOUND_RESERVATION_TIME,
                 DomainErrorKeys.of(
@@ -30,7 +30,7 @@ public class NotFoundDomainException extends DomainException {
         );
     }
 
-    public static NotFoundDomainException notFoundTheme(ThemeId id) {
+    public static NotFoundDomainException theme(ThemeId id) {
         return new NotFoundDomainException(
                 NOT_FOUND_THEME,
                 DomainErrorKeys.of(
@@ -39,7 +39,7 @@ public class NotFoundDomainException extends DomainException {
         );
     }
 
-    public static NotFoundDomainException notFoundUser(UserEmail email) {
+    public static NotFoundDomainException user(UserEmail email) {
         return new NotFoundDomainException(
                 NOT_FOUND_USER,
                 DomainErrorKeys.of(
@@ -48,7 +48,7 @@ public class NotFoundDomainException extends DomainException {
         );
     }
 
-    public static NotFoundDomainException notFoundUser(UserId id) {
+    public static NotFoundDomainException user(UserId id) {
         return new NotFoundDomainException(
                 NOT_FOUND_USER,
                 DomainErrorKeys.of(

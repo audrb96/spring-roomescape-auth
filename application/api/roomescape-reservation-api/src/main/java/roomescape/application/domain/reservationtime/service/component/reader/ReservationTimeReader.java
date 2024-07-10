@@ -27,7 +27,7 @@ public class ReservationTimeReader {
 
     public ReservationTime readById(ReservationTimeId id) {
         return reservationTimeRepository.findById(id)
-                .orElseThrow(() -> NotFoundDomainException.notFoundReservationTime(id));
+                .orElseThrow(() -> NotFoundDomainException.reservationTime(id));
     }
 
     public ReservationTimes readByDateAndThemeId(ReservationDate date, ThemeId themeId) {

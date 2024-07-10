@@ -1,16 +1,15 @@
-package roomescape.application.error.dto;
+package roomescape.auth.error.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
-import roomescape.application.error.exception.ApplicationException;
-import roomescape.error.exception.DomainException;
+import roomescape.auth.error.exception.AuthException;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static roomescape.application.error.code.ApplicationErrorCode.INVALID_API_REQUEST_PARAMETER;
+import static roomescape.auth.error.code.AuthErrorCode.INVALID_API_REQUEST_PARAMETER;
 
 public class ErrorResponse {
 
@@ -41,11 +40,7 @@ public class ErrorResponse {
         );
     }
 
-    public static ErrorResponse from(ApplicationException exception) {
-        return new ErrorResponse(exception.getCodeName(), exception.getMessage());
-    }
-
-    public static ErrorResponse from(DomainException exception) {
+    public static ErrorResponse from(AuthException exception) {
         return new ErrorResponse(exception.getCodeName(), exception.getMessage());
     }
 

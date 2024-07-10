@@ -2,7 +2,7 @@ package roomescape.application.domain.user.service.component.creator;
 
 import org.springframework.stereotype.Component;
 import roomescape.application.domain.user.service.component.validator.CreateUserValidator;
-import roomescape.auth.password.encoder.UserPasswordEncoder;
+import roomescape.auth.common.component.password.encoder.UserPasswordEncoder;
 import roomescape.domain.user.User;
 import roomescape.domain.user.UserRepository;
 import roomescape.domain.user.vo.UserPassword;
