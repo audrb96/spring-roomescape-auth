@@ -3,6 +3,7 @@ package roomescape.auth.error.factory;
 import org.springframework.http.ResponseEntity;
 import roomescape.auth.error.dto.ErrorResponse;
 import roomescape.auth.error.exception.AuthException;
+import roomescape.jwt.error.exception.JwtException;
 
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
@@ -13,6 +14,12 @@ public final class ResponseEntityFactory {
     }
 
     public static ResponseEntity<ErrorResponse> unauthorized(AuthException exception) {
+        return ResponseEntity
+                .status(UNAUTHORIZED)
+                .body(ErrorResponse.from(exception));
+    }
+
+    public static ResponseEntity<ErrorResponse> unauthorized(JwtException exception) {
         return ResponseEntity
                 .status(UNAUTHORIZED)
                 .body(ErrorResponse.from(exception));

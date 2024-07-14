@@ -7,6 +7,7 @@ import roomescape.auth.error.dto.ErrorResponse;
 import roomescape.auth.error.exception.AuthenticationException;
 import roomescape.auth.error.factory.ResponseEntityFactory;
 import roomescape.auth.error.logger.ExceptionLogger;
+import roomescape.jwt.error.exception.JwtException;
 
 @ControllerAdvice
 public class AuthExceptionHandler {
@@ -15,7 +16,14 @@ public class AuthExceptionHandler {
 
 
     @ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<ErrorResponse> handleException(AuthenticationException ex) {
+    public ResponseEntity<ErrorResponse> handle(AuthenticationException ex) {
+        exceptionLogger.log(ex);
+
+        return ResponseEntityFactory.unauthorized(ex);
+    }
+
+    @ExceptionHandler(JwtException.class)
+    public ResponseEntity<ErrorResponse> handle(JwtException ex) {
         exceptionLogger.log(ex);
 
         return ResponseEntityFactory.unauthorized(ex);

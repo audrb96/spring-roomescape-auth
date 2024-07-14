@@ -18,7 +18,7 @@ import roomescape.domain.user.vo.UserId;
 import roomescape.domain.user.vo.UserName;
 import roomescape.domain.user.vo.UserPassword;
 import roomescape.jwt.JwtToken;
-import roomescape.jwt.extractor.CookieTokenExtractor;
+import roomescape.jwt.component.extractor.CookieTokenExtractor;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;

@@ -34,6 +34,7 @@ public class ReservationCommandService {
 
     public Reservation create(CreateReservationCommand command) {
         ReservationTime reservationTime = reservationTimeReader.readById(command.fetchReservationTimeId());
+        
         Theme theme = themeReader.readById(command.fetchThemeId());
 
         return reservationCreator.create(command.fetchReservationName(), command.fetchReservationDate(), reservationTime, theme);

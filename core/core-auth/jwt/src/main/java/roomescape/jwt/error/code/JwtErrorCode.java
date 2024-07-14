@@ -1,11 +1,7 @@
-package roomescape.auth.error.code;
+package roomescape.jwt.error.code;
 
-public enum AuthErrorCode {
+public enum JwtErrorCode {
 
-    INVALID_API_REQUEST_PARAMETER("유효하지 않은 API 요청입니다."),
-    NOT_EXIST_EMAIL("존재하지 않는 이메일의 사용자입니다."),
-    NOT_EXIST_USER("존재하지 않는 사용자입니다."),
-    NOT_MATCH_PASSWORD("패스워드가 일치하지 않습니다."),
     EXPIRED_TOKEN("만료된 토큰입니다."),
     UNSUPPORTED_TOKEN("지원하지 않는 토큰입니다."),
     MALFORMED_TOKEN("유효하지 않은 토큰입니다."),
@@ -14,7 +10,7 @@ public enum AuthErrorCode {
 
     private final String message;
 
-    AuthErrorCode(String message) {
+    JwtErrorCode(String message) {
         this.message = message;
     }
 

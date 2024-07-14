@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import roomescape.auth.error.exception.AuthException;
+import roomescape.jwt.error.exception.JwtException;
 
 import java.util.Collections;
 import java.util.List;
@@ -41,6 +42,10 @@ public class ErrorResponse {
     }
 
     public static ErrorResponse from(AuthException exception) {
+        return new ErrorResponse(exception.getCodeName(), exception.getMessage());
+    }
+
+    public static ErrorResponse from(JwtException exception) {
         return new ErrorResponse(exception.getCodeName(), exception.getMessage());
     }
 

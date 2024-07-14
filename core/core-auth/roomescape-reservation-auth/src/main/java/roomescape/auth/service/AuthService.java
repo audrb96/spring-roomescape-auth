@@ -7,27 +7,22 @@ import roomescape.auth.service.command.LoginCommand;
 import roomescape.auth.service.component.reader.UserReader;
 import roomescape.auth.service.query.LoginCheckQuery;
 import roomescape.domain.user.User;
-import roomescape.domain.user.vo.UserId;
 import roomescape.jwt.JwtToken;
-import roomescape.jwt.decoder.JwtTokenDecoder;
-import roomescape.jwt.provider.JwtTokenProvider;
+import roomescape.jwt.component.provider.JwtTokenProvider;
 
 @Service
 public class AuthService {
 
     private final JwtTokenProvider tokenProvider;
-    private final JwtTokenDecoder decoder;
     private final UserPasswordEncoder passwordEncoder;
     private final UserReader userReader;
 
     public AuthService(
             JwtTokenProvider tokenProvider,
-            JwtTokenDecoder decoder,
             UserPasswordEncoder passwordEncoder,
             UserReader userReader
     ) {
         this.tokenProvider = tokenProvider;
-        this.decoder = decoder;
         this.passwordEncoder = passwordEncoder;
         this.userReader = userReader;
     }
@@ -39,12 +34,10 @@ public class AuthService {
             throw AuthenticationException.notMatchPassword(command.fetchPassword());
         }
 
-        return tokenProvider.createToken(user.getId());
+        return tokenProvider.provide(user.getId());
     }
 
     public User loginCheck(LoginCheckQuery query) {
-        UserId userId = decoder.decode(query.getToken());
-
-        return userReader.readById(userId);
+        return userReader.readById(query.getUserId());
     }
 }

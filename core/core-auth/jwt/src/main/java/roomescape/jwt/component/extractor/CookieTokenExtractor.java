@@ -1,4 +1,4 @@
-package roomescape.jwt.extractor;
+package roomescape.jwt.component.extractor;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;

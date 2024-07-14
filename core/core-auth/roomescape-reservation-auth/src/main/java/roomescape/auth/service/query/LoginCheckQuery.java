@@ -1,16 +1,17 @@
 package roomescape.auth.service.query;
 
-import roomescape.jwt.JwtToken;
+import roomescape.domain.user.vo.UserId;
 
 public class LoginCheckQuery {
 
-    private final JwtToken token;
+    private final UserId userId;
 
-    public LoginCheckQuery(JwtToken token) {
-        this.token = token;
+
+    public LoginCheckQuery(UserId userId) {
+        this.userId = userId;
     }
 
-    public JwtToken getToken() {
-        return token;
+    public UserId getUserId() {
+        return userId;
     }
 }
