@@ -1,4 +1,4 @@
-package roomescape.application.presentation.api;
+package roomescape.auth.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,8 +9,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import roomescape.auth.api.AuthApi;
 import roomescape.auth.api.dto.request.LoginRequest;
+import roomescape.auth.config.AuthenticationConfig;
+import roomescape.auth.config.AuthenticationPrincipalArgumentResolver;
 import roomescape.auth.service.AuthService;
 import roomescape.domain.user.User;
 import roomescape.domain.user.vo.UserEmail;
@@ -36,7 +37,14 @@ class AuthApiTest {
     private AuthService authService;
 
     @MockBean
-    private CookieTokenExtractor tokenExtractor;
+    private AuthenticationConfig config;
+
+    @MockBean
+    private CookieTokenExtractor cookieTokenExtractor;
+
+    @MockBean
+    private AuthenticationPrincipalArgumentResolver argumentResolver;
+
 
     @Autowired
     private MockMvc mockMvc;

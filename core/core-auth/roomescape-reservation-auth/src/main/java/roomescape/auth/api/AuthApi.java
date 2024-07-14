@@ -15,17 +15,14 @@ import roomescape.auth.service.query.LoginCheckQuery;
 import roomescape.domain.user.User;
 import roomescape.domain.user.vo.UserId;
 import roomescape.jwt.JwtToken;
-import roomescape.jwt.component.extractor.CookieTokenExtractor;
 
 @RestController
 public class AuthApi {
 
     private final AuthService authService;
-    private final CookieTokenExtractor tokenExtractor;
 
-    public AuthApi(AuthService authService, CookieTokenExtractor tokenExtractor) {
+    public AuthApi(AuthService authService) {
         this.authService = authService;
-        this.tokenExtractor = tokenExtractor;
     }
 
     @PostMapping("/login")

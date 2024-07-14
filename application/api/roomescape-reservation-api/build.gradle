@@ -9,6 +9,7 @@ jar {
 dependencies {
     implementation project(':core:core-domain:roomescape-reservation-domain')
     implementation project(':core:core-db:roomescape-mysql-jdbc-db')
+    implementation project(':core:core-auth:jwt')
     implementation project(':core:core-auth:roomescape-reservation-auth')
     implementation project(':support:yml-importer')
 
