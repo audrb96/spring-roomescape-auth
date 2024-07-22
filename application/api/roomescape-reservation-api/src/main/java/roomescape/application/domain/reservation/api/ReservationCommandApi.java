@@ -7,7 +7,9 @@ import roomescape.application.domain.reservation.api.dto.request.CreateReservati
 import roomescape.application.domain.reservation.api.dto.response.CreateReservationResponse;
 import roomescape.application.domain.reservation.service.ReservationCommandService;
 import roomescape.application.domain.reservation.service.command.DeleteReservationCommand;
+import roomescape.auth.annotation.AuthenticationPrincipal;
 import roomescape.domain.reservation.Reservation;
+import roomescape.domain.user.vo.UserId;
 
 import java.net.URI;
 
@@ -21,8 +23,11 @@ public class ReservationCommandApi {
     }
 
     @PostMapping("/reservations")
-    public ResponseEntity<CreateReservationResponse> createReservation(@RequestBody @Valid CreateReservationRequest request) {
-        Reservation reservation = reservationCommandService.create(request.toCreateReservationCommand());
+    public ResponseEntity<CreateReservationResponse> createReservation(
+            @RequestBody @Valid CreateReservationRequest request,
+            @AuthenticationPrincipal UserId userId
+    ) {
+        Reservation reservation = reservationCommandService.create(request.toCreateReservationCommand(userId));
 
         return ResponseEntity.created(URI.create(String.format("/reservations/%d", reservation.getId().id())))
                 .body(CreateReservationResponse.from(reservation));

@@ -10,14 +10,14 @@ public class FindAllReservationsResponse {
     private static final String DATE_PATTERN = "yyyy-MM-dd";
     private static final String TIME_PATTERN = "HH:mm";
     private final Long id;
-    private final String name;
+    private final User user;
     private final String date;
     private final Time time;
     private final Theme theme;
 
-    public FindAllReservationsResponse(Long id, String name, String date, Time time, Theme theme) {
+    public FindAllReservationsResponse(Long id, User user, String date, Time time, Theme theme) {
         this.id = id;
-        this.name = name;
+        this.user = user;
         this.date = date;
         this.time = time;
         this.theme = theme;
@@ -26,7 +26,7 @@ public class FindAllReservationsResponse {
     private static FindAllReservationsResponse from(ReservationView reservationView) {
         return new FindAllReservationsResponse(
                 reservationView.getReservationId().id(),
-                reservationView.getReservationName().name(),
+                new User(reservationView.getUserName().name()),
                 reservationView.getFormatReservationDate(DATE_PATTERN),
                 new Time(
                         reservationView.getReservationTimeId().id(),
@@ -53,8 +53,8 @@ public class FindAllReservationsResponse {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public User getUser() {
+        return user;
     }
 
     public String getDate() {
@@ -87,17 +87,10 @@ public class FindAllReservationsResponse {
 
     private static class User {
 
-        private final Long id;
-
         private final String name;
 
-        public User(Long id, String name) {
-            this.id = id;
+        public User(String name) {
             this.name = name;
-        }
-
-        public Long getId() {
-            return id;
         }
 
         public String getName() {

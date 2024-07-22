@@ -3,11 +3,11 @@ package roomescape.repository.domain.reservation.projection;
 import roomescape.domain.reservation.ReservationView;
 import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservation.vo.ReservationId;
-import roomescape.domain.reservation.vo.ReservationName;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.reservationtime.vo.ReservationTimeStartAt;
 import roomescape.domain.theme.vo.ThemeId;
 import roomescape.domain.theme.vo.ThemeName;
+import roomescape.domain.user.vo.UserName;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -16,7 +16,7 @@ public class ReservationViewProjection {
 
     private final Long reservationId;
 
-    private final String reservationName;
+    private final String userName;
 
     private final Long reservationTimeId;
 
@@ -30,7 +30,7 @@ public class ReservationViewProjection {
 
     public ReservationViewProjection(
             Long reservationId,
-            String reservationName,
+            String userName,
             Long reservationTimeId,
             LocalDate reservationDate,
             LocalTime reservationTimeStartAt,
@@ -38,7 +38,7 @@ public class ReservationViewProjection {
             String themeName
     ) {
         this.reservationId = reservationId;
-        this.reservationName = reservationName;
+        this.userName = userName;
         this.reservationTimeId = reservationTimeId;
         this.reservationDate = reservationDate;
         this.reservationTimeStartAt = reservationTimeStartAt;
@@ -49,7 +49,7 @@ public class ReservationViewProjection {
     public ReservationView toDomain() {
         return new ReservationView(
                 new ReservationId(this.reservationId),
-                new ReservationName(this.reservationName),
+                new UserName(this.userName),
                 new ReservationTimeId(this.reservationTimeId),
                 new ReservationDate(this.reservationDate),
                 new ReservationTimeStartAt(this.reservationTimeStartAt),

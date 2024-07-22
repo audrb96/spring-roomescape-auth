@@ -8,9 +8,9 @@ import roomescape.domain.reservation.ReservationRepository;
 import roomescape.domain.reservation.vo.CreateReservationTime;
 import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservation.vo.ReservationId;
-import roomescape.domain.reservation.vo.ReservationName;
 import roomescape.domain.reservationtime.ReservationTime;
 import roomescape.domain.theme.Theme;
+import roomescape.domain.user.vo.UserId;
 
 @Component
 public class ReservationCreator {
@@ -31,7 +31,7 @@ public class ReservationCreator {
     }
 
     public Reservation create(
-            ReservationName name,
+            UserId userId,
             ReservationDate date,
             ReservationTime time,
             Theme theme
@@ -40,7 +40,7 @@ public class ReservationCreator {
 
         Reservation createdReservation = Reservation.create(
                 ReservationId.empty(),
-                name,
+                userId,
                 date,
                 time,
                 theme.getId(),

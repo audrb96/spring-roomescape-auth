@@ -3,29 +3,29 @@ package roomescape.repository.domain.reservation.entity;
 import roomescape.domain.reservation.Reservation;
 import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservation.vo.ReservationId;
-import roomescape.domain.reservation.vo.ReservationName;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.theme.vo.ThemeId;
+import roomescape.domain.user.vo.UserId;
 
 import java.time.LocalDate;
 
 public class ReservationEntity {
 
     private final Long id;
-    private final String reservationName;
+    private final Long userId;
     private final LocalDate date;
     private final Long reservationTimeId;
     private final Long themeId;
 
     public ReservationEntity(
             Long id,
-            String reservationName,
+            Long userId,
             LocalDate date,
             Long reservationTimeId,
             Long themeId
     ) {
         this.id = id;
-        this.reservationName = reservationName;
+        this.userId = userId;
         this.date = date;
         this.reservationTimeId = reservationTimeId;
         this.themeId = themeId;
@@ -34,7 +34,7 @@ public class ReservationEntity {
     public static ReservationEntity from(Reservation reservation) {
         return new ReservationEntity(
                 reservation.getId().id(),
-                reservation.getName().name(),
+                reservation.getUserId().id(),
                 reservation.getDate().date(),
                 reservation.getTimeId().id(),
                 reservation.getThemeId().id()
@@ -42,15 +42,15 @@ public class ReservationEntity {
     }
 
     public ReservationEntity withId(Long id) {
-        return new ReservationEntity(id, this.reservationName, date, this.reservationTimeId, themeId);
+        return new ReservationEntity(id, this.userId, date, this.reservationTimeId, themeId);
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getReservationName() {
-        return this.reservationName;
+    public Long getUserId() {
+        return userId;
     }
 
     public Long getReservationTimeId() {
@@ -66,9 +66,9 @@ public class ReservationEntity {
     }
 
     public Reservation toDomain() {
-        return Reservation.of(
+        return Reservation.mappedBy(
                 new ReservationId(this.id),
-                new ReservationName(this.reservationName),
+                new UserId(this.userId),
                 new ReservationDate(this.date),
                 new ReservationTimeId(this.reservationTimeId),
                 new ThemeId(this.themeId)

@@ -1,16 +1,15 @@
-package roomescape.application.domain.reservation.api.dto.request;
+package roomescape.application.domain.reservation.admin.api.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
-import roomescape.application.domain.reservation.service.command.CreateReservationCommand;
-import roomescape.domain.user.vo.UserId;
+import roomescape.application.domain.reservation.admin.service.command.AdminCreateReservationCommand;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class CreateReservationRequest {
+public class AdminCreateReservationRequest {
 
     private static final String DATE_FORMAT = "yyyy-MM-dd";
 
@@ -26,15 +25,23 @@ public class CreateReservationRequest {
     @NotNull(message = "이 값은 필수입니다.")
     private final Long themeId;
 
+    @Positive
+    @NotNull(message = "이 값은 필수입니다.")
+    private final Long userId;
 
-    public CreateReservationRequest(String date, Long timeId, Long themeId) {
+    public AdminCreateReservationRequest(String date, Long timeId, Long themeId, Long userId) {
         this.date = date;
         this.timeId = timeId;
         this.themeId = themeId;
+        this.userId = userId;
     }
 
-    public CreateReservationCommand toCreateReservationCommand(UserId userId) {
-        return new CreateReservationCommand(userId.id(), LocalDate.parse(this.date, DateTimeFormatter.ofPattern(DATE_FORMAT)), this.timeId, this.themeId);
+    public AdminCreateReservationCommand toCommand() {
+        return new AdminCreateReservationCommand(this.userId, LocalDate.parse(this.date, DateTimeFormatter.ofPattern(DATE_FORMAT)), this.timeId, this.themeId);
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public Long getTimeId() {
@@ -45,7 +52,7 @@ public class CreateReservationRequest {
         return themeId;
     }
 
-    public String getDate() {
-        return date;
+    public Long getUserId() {
+        return userId;
     }
 }

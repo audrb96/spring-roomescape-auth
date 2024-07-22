@@ -3,17 +3,17 @@ package roomescape.domain.reservation;
 import roomescape.domain.reservation.validator.ReservationViewValidator;
 import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservation.vo.ReservationId;
-import roomescape.domain.reservation.vo.ReservationName;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.reservationtime.vo.ReservationTimeStartAt;
 import roomescape.domain.theme.vo.ThemeId;
 import roomescape.domain.theme.vo.ThemeName;
+import roomescape.domain.user.vo.UserName;
 
 public class ReservationView {
 
     private final ReservationId reservationId;
 
-    private final ReservationName reservationName;
+    private final UserName userName;
 
     private final ReservationTimeId reservationTimeId;
 
@@ -27,7 +27,7 @@ public class ReservationView {
 
     public ReservationView(
             ReservationId reservationId,
-            ReservationName reservationName,
+            UserName userName,
             ReservationTimeId reservationTimeId,
             ReservationDate reservationDate,
             ReservationTimeStartAt reservationTimeStartAt,
@@ -36,7 +36,7 @@ public class ReservationView {
     ) {
         ReservationViewValidator.validate(
                 reservationId,
-                reservationName,
+                userName,
                 reservationTimeId,
                 reservationDate,
                 reservationTimeStartAt,
@@ -44,7 +44,7 @@ public class ReservationView {
                 themeName
         );
         this.reservationId = reservationId;
-        this.reservationName = reservationName;
+        this.userName = userName;
         this.reservationTimeId = reservationTimeId;
         this.reservationDate = reservationDate;
         this.reservationTimeStartAt = reservationTimeStartAt;
@@ -56,8 +56,8 @@ public class ReservationView {
         return reservationId;
     }
 
-    public ReservationName getReservationName() {
-        return reservationName;
+    public UserName getUserName() {
+        return userName;
     }
 
     public String getFormatReservationDate(String pattern) {

@@ -2,11 +2,11 @@ package roomescape.domain.reservation.validator;
 
 import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservation.vo.ReservationId;
-import roomescape.domain.reservation.vo.ReservationName;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.reservationtime.vo.ReservationTimeStartAt;
 import roomescape.domain.theme.vo.ThemeId;
 import roomescape.domain.theme.vo.ThemeName;
+import roomescape.domain.user.vo.UserName;
 import roomescape.error.exception.DomainValidateException;
 
 import java.util.Objects;
@@ -19,7 +19,7 @@ public final class ReservationViewValidator {
 
     public static void validate(
             ReservationId reservationId,
-            ReservationName reservationName,
+            UserName userName,
             ReservationTimeId reservationTimeId,
             ReservationDate reservationDate,
             ReservationTimeStartAt reservationTimeStartAt,
@@ -28,7 +28,7 @@ public final class ReservationViewValidator {
     ) {
         validateNotNull(
                 reservationId,
-                reservationName,
+                userName,
                 reservationTimeId,
                 reservationDate,
                 reservationTimeStartAt,
@@ -39,7 +39,7 @@ public final class ReservationViewValidator {
 
     private static void validateNotNull(
             ReservationId reservationId,
-            ReservationName reservationName,
+            UserName userName,
             ReservationTimeId reservationTimeId,
             ReservationDate reservationDate,
             ReservationTimeStartAt reservationTimeStartAt,
@@ -49,8 +49,8 @@ public final class ReservationViewValidator {
         if (Objects.isNull(reservationId)) {
             throw DomainValidateException.notToBeNull(ReservationId.class);
         }
-        if (Objects.isNull(reservationName)) {
-            throw DomainValidateException.notToBeNull(ReservationName.class);
+        if (Objects.isNull(userName)) {
+            throw DomainValidateException.notToBeNull(UserName.class);
         }
         if (Objects.isNull(reservationTimeId)) {
             throw DomainValidateException.notToBeNull(ReservationTimeId.class);

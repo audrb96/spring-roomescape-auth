@@ -4,6 +4,7 @@ import roomescape.domain.reservation.vo.ReservationId;
 import roomescape.domain.reservation.vo.ReservationName;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.theme.vo.ThemeId;
+import roomescape.domain.user.vo.UserId;
 import roomescape.error.exception.DomainValidateException;
 
 import java.util.Objects;
@@ -16,23 +17,23 @@ public final class ReservationValidator {
 
     public static void validate(
             ReservationId id,
-            ReservationName name,
+            UserId userId,
             ReservationTimeId timeId,
             ThemeId themeId
     ) {
-        validateNotNull(id, name, timeId, themeId);
+        validateNotNull(id, userId, timeId, themeId);
     }
 
     private static void validateNotNull(
             ReservationId id,
-            ReservationName name,
+            UserId userId,
             ReservationTimeId timeId,
             ThemeId themeId
     ) {
         if (Objects.isNull(id)) {
             throw DomainValidateException.notToBeNull(ReservationId.class);
         }
-        if (Objects.isNull(name)) {
+        if (Objects.isNull(userId)) {
             throw DomainValidateException.notToBeNull(ReservationName.class);
         }
         if (Objects.isNull(timeId)) {

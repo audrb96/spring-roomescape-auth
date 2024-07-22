@@ -17,9 +17,9 @@ import roomescape.application.domain.reservation.service.ReservationCommandServi
 import roomescape.domain.reservation.Reservation;
 import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservation.vo.ReservationId;
-import roomescape.domain.reservation.vo.ReservationName;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.theme.vo.ThemeId;
+import roomescape.domain.user.vo.UserId;
 
 import java.time.LocalDate;
 
@@ -46,9 +46,9 @@ class ReservationCommandApiTest {
 
     @BeforeEach
     void setUp() {
-        reservation = Reservation.of(
+        reservation = Reservation.mappedBy(
                 new ReservationId(1L),
-                new ReservationName("kilian"),
+                new UserId(1L),
                 new ReservationDate(LocalDate.of(2024, 7, 3)),
                 new ReservationTimeId(1L),
                 new ThemeId(1L)
@@ -58,9 +58,8 @@ class ReservationCommandApiTest {
     @Test
     @DisplayName("예약 생성 API 컨트롤러 테스트")
     void createReservationTest() throws Exception {
-        String reservationName = "kilian";
         CreateReservationRequest request =
-                new CreateReservationRequest(reservationName, "2024-07-03", 1L, 1L);
+                new CreateReservationRequest("2024-07-03", 1L, 1L);
 
         given(reservationCommandService.create(any()))
                 .willReturn(reservation);

@@ -17,11 +17,11 @@ import roomescape.domain.reservation.ReservationView;
 import roomescape.domain.reservation.ReservationViews;
 import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservation.vo.ReservationId;
-import roomescape.domain.reservation.vo.ReservationName;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
 import roomescape.domain.reservationtime.vo.ReservationTimeStartAt;
 import roomescape.domain.theme.vo.ThemeId;
 import roomescape.domain.theme.vo.ThemeName;
+import roomescape.domain.user.vo.UserName;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -50,7 +50,7 @@ class ReservationQueryApiTest {
     void setUp() {
         ReservationView reservationView = new ReservationView(
                 new ReservationId(1L),
-                new ReservationName("kilian"),
+                new UserName("kilian"),
                 new ReservationTimeId(1L),
                 new ReservationDate(LocalDate.of(2024, 6, 6)),
                 new ReservationTimeStartAt(LocalTime.of(18, 24)),

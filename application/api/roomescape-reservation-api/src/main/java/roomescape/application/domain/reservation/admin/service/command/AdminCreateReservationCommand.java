@@ -1,4 +1,4 @@
-package roomescape.application.domain.reservation.service.command;
+package roomescape.application.domain.reservation.admin.service.command;
 
 import roomescape.domain.reservation.vo.ReservationDate;
 import roomescape.domain.reservationtime.vo.ReservationTimeId;
@@ -7,7 +7,7 @@ import roomescape.domain.user.vo.UserId;
 
 import java.time.LocalDate;
 
-public class CreateReservationCommand {
+public class AdminCreateReservationCommand {
 
     private final Long userId;
 
@@ -17,12 +17,7 @@ public class CreateReservationCommand {
 
     private final Long themeId;
 
-    public CreateReservationCommand(
-            Long userId,
-            LocalDate date,
-            Long timeId,
-            Long themeId
-    ) {
+    public AdminCreateReservationCommand(Long userId, LocalDate date, Long timeId, Long themeId) {
         this.userId = userId;
         this.date = date;
         this.timeId = timeId;
